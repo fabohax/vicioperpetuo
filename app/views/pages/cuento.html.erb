@@ -1,0 +1,36 @@
+<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"logo" %>  
+
+<nav>
+    <a href="info">EDITORIAL</a>
+    <a href="info#servicios">SERVICIOS</a>
+    <a href="autores">AUTORES</a>
+</nav>
+<div class="parallax">
+   <center>
+      <video autoplay muted loop id="intro" class="mx-auto no-mobile">
+         <source src="<%= asset_path('vpvp.mp4') %>" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+   </center>
+   <center>
+      <div class="menu p-5 mx-auto">
+         <%= link_to "Narrativa", narrativa_path %>
+         <%= link_to "Poesía", poesia_path %>
+         <%= link_to "Cuento", cuento_path %>
+         <%= link_to "Novela", novela_path %>
+         <%= link_to "Ensayo", ensayo_path %>
+      </div>
+   </center>
+   <center id="books">
+
+      <%= link_to image_tag('covers/laotraorilla.png'), laotraorilla_path, class:"hover" %>
+      <%= link_to image_tag('covers/cuentaconmigoversocontigo.png'), cuentaconmigoversocontigo_path, class:"hover" %>
+      <%= link_to image_tag('covers/tiempodetenido.png'), tiempodetenido_path, class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/andandoencuentos.png'), andandoencuentos_path, class:"hover" %>
+      <%= link_to image_tag('covers/cosasquesucedencuentosfantasticos.png'), cosasquesucedencuentosfantasticos_path, class:"hover" %>
+      <%= link_to image_tag('covers/lacomarcayotrosrelatos.png'), lacomarcayotrosrelatos_path, class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/sobresaltadosueno.png'), sobresaltadosueno_path, class:"hover" %>
+   </center>
+</div>

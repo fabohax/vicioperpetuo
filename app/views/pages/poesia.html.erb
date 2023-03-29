@@ -1,0 +1,49 @@
+<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"logo" %>  
+<nav>
+    <a href="info">EDITORIAL</a>
+    <a href="info#servicios">SERVICIOS</a>
+    <a href="autores">AUTORES</a>
+</nav>
+<div class="parallax">
+   <center>
+      <video autoplay muted loop id="intro" class="mx-auto no-mobile">
+         <source src="<%= asset_path('vpvp.mp4') %>" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+   </center>
+   <center>
+      <div class="menu p-5 mx-auto">
+         <%= link_to "Narrativa", narrativa_path %>
+         <%= link_to "Poesía", poesia_path %>
+         <%= link_to "Cuento", cuento_path %>
+         <%= link_to "Novela", novela_path %>
+         <%= link_to "Ensayo", ensayo_path %>
+      </div>
+   </center>
+   <center id="books">
+      <%= link_to image_tag("covers/decomplicetenemosalaluna.png"), decomplicetenemosalaluna_path, class:"hover" %>
+      <%= link_to image_tag('covers/lapaginaqueescribimos.png'), lapaginaqueescribimos_path, class:"hover" %>
+      <%= link_to image_tag('covers/deamorisessentia.png'), deamorisessentia_path, class:"hover" %>
+      <%= link_to image_tag('covers/fuegodeceniza.png'), fuegodeceniza_path, class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/misdecimasyyo.png'), misdecimasyyo_path, class:"hover" %>
+      <%= link_to image_tag('covers/todaslasvoces.png'), todaslasvoces_path, class:"hover" %>
+      <%= link_to image_tag('covers/vertigo.png'), vertigo_path, class:"hover" %>
+      <%= link_to image_tag('covers/vespertilio.png'), vespertilio_path, class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/acleman.png'), acleman_path, class:"hover" %>
+      <%= link_to image_tag('covers/alpiedeldesierto.png'), alpiedeldesierto_path, class:"hover" %>
+      <%= link_to image_tag('covers/celebraciondeltiempo.png'), celebraciondeltiempo_path, class:"hover" %>
+      <%= link_to image_tag('covers/vozcelestial.png'), vozcelestial_path, class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/bicentenario.png'), bicentenario_path, class:"hover" %>
+      <%= link_to image_tag('covers/dialogospostumos.png'), dialogospostumos_path, class:"hover" %>
+      <%= link_to image_tag('covers/gotasobrepiedra.png'), gotasobrepiedra_path, class:"hover" %>
+      
+      <%= link_to image_tag('covers/lascallesdemialma.png'), lascallesdemialma_path, class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mutilada.png'), mutilada_path, class:"hover" %>
+      <%= link_to image_tag('covers/sacrificiodeamor.png'), sacrificiodeamor_path, class:"hover" %>
+      <%= link_to image_tag('covers/sinfonialirica.png'), sinfonialirica_path, class:"hover" %>
+   </center>
+</div>

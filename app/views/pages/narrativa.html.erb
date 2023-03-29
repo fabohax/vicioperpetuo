@@ -1,0 +1,55 @@
+
+<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"logo" %>  
+<nav>
+    <a href="info">EDITORIAL</a>
+    <a href="info#servicios">SERVICIOS</a>
+    <a href="autores">AUTORES</a>
+</nav>
+
+<div class="parallax">
+<center><video autoplay muted loop id="intro" class="mx-auto no-mobile">
+<source src="<%= asset_path('vpvp.mp4') %>" type="video/mp4">
+Your browser does not support the video tag.
+</video></center>
+
+<center><div class="menu p-5 mx-auto">
+<%= link_to "Narrativa", narrativa_path %>
+<%= link_to "Poesía", poesia_path %>
+<%= link_to "Cuento", cuento_path %>
+<%= link_to "Novela", novela_path %>
+<%= link_to "Ensayo", ensayo_path %>
+</div></center>
+
+<center id="books">
+
+    <%= link_to image_tag("covers/mins/decomplicetenemosalaluna.png"), decomplicetenemosalaluna_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/elnovelistayeltrompo.png'), elnovelistayeltrompo_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/elrevesdelcirculodebabel.png'), elrevesdelcirculodebabel_path, class:"hover" %>
+    <br>
+    <%= link_to image_tag('covers/mins/lacuarentena.png'), lacuarentena_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/laotraorilla.png'), laotraorilla_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/companiaeterna.png'), companiaeterna_path, class:"hover" %>
+    <br>
+    <%= link_to image_tag('covers/mins/cuentaconmigoversocontigo.png'), cuentaconmigoversocontigo_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/soploinocente.png'), soploinocente_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/tiempodetenido.png'), tiempodetenido_path, class:"hover" %>
+    <br>
+    <%= link_to image_tag('covers/mins/andandoencuentos.png'), andandoencuentos_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/generacionbicentenario.png'), generacionbicentenario_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/buscandoavenus.png'), buscandoavenus_path, class:"hover" %>
+    <br>
+    <%= link_to image_tag('covers/mins/cosasquesucedencuentosfantasticos.png'), cosasquesucedencuentosfantasticos_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/lacomarcayotrosrelatos.png'), lacomarcayotrosrelatos_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/lanuevaola.png'), lanuevaola_path, class:"hover" %>
+    <br>
+    <%= link_to image_tag('covers/mins/linda.png'), linda_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/masalladondetodonace.png'), masalladondetodonace_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/nuncaensillesauncaballovirtual.png'), nuncaensillesauncaballovirtual_path, class:"hover" %>
+    <br>
+    <%= link_to image_tag('covers/mins/paramiamantesustituta.png'), paramiamantesustituta_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/sensaciones.png'), sensaciones_path, class:"hover" %>
+    <%= link_to image_tag('covers/mins/sobresaltadosueno.png'), sobresaltadosueno_path, class:"hover" %>
+
+</center>
+
+</div>

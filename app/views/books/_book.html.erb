@@ -1,0 +1,204 @@
+<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"no-mobile logo" %>  
+
+<meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="og:title">
+   <meta content="https://vicioperpetuo.com" property="og:url">
+   <meta content="https://vicioperpetuo.fly.dev/assets/social.jpg" property="og:image">
+   <meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="og:description">
+   <meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="twitter:title">
+   <meta content="https://vicioperpetuo.com" property="twitter:url">
+   <meta content="https://vicioperpetuo.fly.dev/assets/social.jpg" property="twitter:image">
+   <meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="twitter:content">
+
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="ModalLabel">
+               Comprar 
+               <div id="book-name">"<%= @bookTitle %>" de <%= @bookAuthor %></div>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <center>
+               <div class="mx-auto"><%= image_tag 'yape.png', class:'pay-icon rounded-circle' %><%= image_tag 'plin.png', class:'pay-icon rounded-circle' %><%= image_tag 'bitcoin.png', class:'pay-icon rounded-circle' %></div>
+            </center>
+            <div class="form-group">
+               <form id="payment-form">
+                  <label for="select"></label>      
+                  <select class="form-control" id="payment-method">
+                     <option value="">Elegir método de pago</option>
+                     <option value="Yape">Yape</option>
+                     <option value="Plin">Plin</option>
+                     <option value="Bitcoin">Bitcoin</option>
+                  </select>
+                  <script>                                                                                                      
+                     $(function() {
+                         $('.paybox').hide();
+                         $('#payment-method').change(function(){
+                         $('.paybox').hide();
+                         $('#' + $(this).val()).show();
+                     });
+                     });
+                     
+                     $('#Yape').hover(function(){
+                     $(this).css('background','')
+                     });
+                  </script>        
+                  <p>
+                  <div id="Yape" class="paybox yape"><%= image_tag 'yape_vicio.svg' %>Transferir <%= @bookPrice %> PEN a 929297202 y capturar pantalla de la operación.</div>
+                  <div id="Plin" class="paybox plin"><%= image_tag 'plin_vicio.svg' %>Transferir <%= @bookPrice %> PEN a 929297202 y capturar pantalla de la operación.</div>
+                  <div id="Bitcoin" class="paybox bitcoin mb-3"><%= image_tag 'bits_vicio.png', style:'width:100%' %>Transferir 30 000 satoshis a bc1qpgelupwfppcrzhaphkerf3l852fj8awg3w0fcm y capturar pantalla de la operación.</div>
+                  </p>
+                  <p>
+                     <input type="email" class="form-control mb-3" id="email" placeholder="Correo electrónico">               
+                     <button type="submit" class="btn btn-primary" style="width:100%" onclick="sendPayForm()"><%= image_tag "whatsappw.svg", style:"height:1rem;margin:-2px 5px 0px;" %>Enviar pedido</button>
+                  </p>
+               </form>
+            </div>
+         </div>
+         <!-- WhatsApp Link Generator -->
+         <script>
+            function sendPayForm() {
+              // Get the form input values
+              const bookTitle = document.getElementById('book-name').textContent;
+              const paymentMethod = document.getElementById('payment-method').value;
+              const email = document.getElementById('email').value;
+            
+              // Generate the WhatsApp message with input values
+              const message = `Hola, quiero adquirir ${bookTitle}, ya hice el pago vía ${paymentMethod}, mi correo es ${email} y adjunto a continuación la captura del pago realizado.`;
+            
+              // Generate the WhatsApp link with the message
+              const whatsappLink = `https://wa.me/51929297202/?text=${encodeURIComponent(message)}`;
+            
+              // Open the WhatsApp link in a new tab
+              window.open(whatsappLink, '_blank');
+            }
+         </script>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="shareModalLabel">
+               Compartir 
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <%= link_to image_tag('twitter.svg'), "https://twitter.com/intent/tweet?url=https://vicioperpetuo.com/#{@bookID}&text=Recomiendo+leer+este+libro+llamado+'#{ @bookTitle }'+de+#{ @bookAuthor }+que+lo+pueden+encontrar+disponible+en+la+tienda+virtual+de+vicioperpetuo.com.+¡Consíguelo!", target:"_blank", rel:"noopener noreferrer", class:"big-share-icon" %>
+            <%= link_to image_tag('facebook.svg'), "https://www.facebook.com/sharer/sharer.php?u=https://vicioperpetuo.com/#{@bookID}", target:"_blank", rel:"noopener noreferrer", class:"big-share-icon" %>
+            <%= link_to image_tag('whatsappg.svg'), "https://api.whatsapp.com/send?text=Recomiendo+leer+este+libro+llamado+'#{ @bookTitle }'+de+#{ @bookAuthor }+que+lo+pueden+encontrar+disponible+en+la+tienda+virtual+de+vicioperpetuo.com/#{@bookID}.+¡Consíguelo!", target:"_blank", rel:"noopener noreferrer", class:"big-share-icon" %>
+            <button id="copy-btn" onclick="copyText()" style="background:#FFF;"><%= image_tag 'link.svg', class:"big-share-icon social-link" %></button>
+         </div>
+
+      </div>
+   </div>
+</div>
+
+<div class="product-page-container">
+   <div id="w-node-_6389db62-945a-5d3f-5ac9-e328106d88b4-4af750d4" class="">
+      <center><%= image_tag("covers/#{ @bookID }.png", class: "medium") %></center>
+   </div>
+   <div id="w-node-eb2b6a3a-8a55-617d-dfff-a3583cf84fc7-4af750d4" class="medium right-column">
+      <div class="product-detail-container">
+         <div class="text-block-15">
+            <%= @bookAuthor %>
+         </div>
+         <div class="text-block-12">
+            <%= @bookTitle %>
+         </div>
+         <price class="text-block-16">
+            <%= @bookPrice %> PEN
+         </price>
+         <p>
+         <p>
+         <p>
+            <button type="button" class="rounded-pill btn btn-block btn-dark" data-toggle="modal" data-target="#buyModal">
+            <%= image_tag 'shop-cart.svg', class:"share-icon", style:"filter:invert(1);" %> Comprar
+            </button>
+            <button type="button" class="rounded-pill btn btn-block btn-light" data-toggle="modal" data-target="#shareModal">
+            <%= image_tag 'share.svg', class:"share-icon" %> Compartir
+         </button>
+         <div class="book-description p5" >
+            <%= @bookDescription %>
+         </div>
+         <div class="book-categories-block">
+            <div class="w-dyn-list">
+               <div role="list" class="collection-list-9 collection-list-10 w-dyn-items">
+                  <div role="listitem" class="collection-item-8 w-dyn-item">
+                     <a href="/<%= @bookGenderPath %>" class="link-block-8 w-inline-block">
+                        <div class="text-block-25" style="text-transform:capitalize"><%= @bookGender %></div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="product-details-block w-richtext">
+            <p>ISBN: <%= @bookISBN %>, </p>
+            <p><%= @bookYear %>, </p>
+            <p>pp. <%= @bookPages %>, </p>
+            <p><%= @bookRatio %> cm.</p>
+            <p><%= @bookEditorial %></p>
+            <p>&zwj;</p>
+            <p>&zwj;</p>
+            <p>&zwj;</p>
+         </div>
+         
+      </div>
+   </div>
+</div>
+<div class="next-product m-5">
+   <center>
+      <p>
+         <span style="margin:3vh;padding-bottom:6vh">Ver siguiente ➤
+         </span>
+      </p>
+   </center>
+   <center>
+      <p><%= link_to "#{@bookNextName}", "#{@bookNextPath}", style:"font-size:36px; text-decoration:none; margin-bottom:5vh;" %></p>
+   </center>
+</div>
+
+
+
+
+
+<div id="disqus_thread" style="padding:10px;"></div>
+<script type="text/javascript">
+      function copyText() {
+        var textToCopy = "https://vicioperpetuo.com/#{@bookID}";
+        var tempInput = document.createElement("input");
+        tempInput.setAttribute("value", textToCopy);
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        alert("¡Enlace copiado! Puedes compartirlo donde desees.");
+      }
+</script>
+<script>
+   /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+   /*
+   var disqus_config = function () {
+   this.page.url = http://vicioperpetuo.com/<%= @bookID %>;  // Replace PAGE_URL with your page's canonical URL variable
+   this.page.identifier = "<%= @bookID %>"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+   };
+   */
+   (function() { // DON'T EDIT BELOW THIS LINE
+   var d = document, s = d.createElement('script');
+   s.src = 'https://viciope.disqus.com/embed.js';
+   s.setAttribute('data-timestamp', +new Date());
+   (d.head || d.body).appendChild(s);
+   })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

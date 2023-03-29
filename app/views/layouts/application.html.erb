@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Vicio Perpetuo Vicio Perfecto</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      
+      <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' %>
+
+      <%= javascript_include_tag 'https://code.jquery.com/jquery-3.6.0.min.js', crossorigin:"anonymous" %>
+      <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js', crossorigin:"anonymous" %>     
+      <%= stylesheet_link_tag 'css.css' %>
+      <%= stylesheet_link_tag    'application', media: 'all' %>    
+      <%= javascript_importmap_tags %>
+      <link rel="shortcut icon" type="image/x-icon" href="<%= asset_path('favicon.ico') %>">
+      <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path('apple-touch-icon.png') %>">
+      <link rel="icon" type="image/png" sizes="32x32" href="<%= asset_path('favicon-32x32.png') %>">
+      <link rel="icon" type="image/png" sizes="16x16" href="<%= asset_path('favicon-16x16.png') %>">
+      <link rel="manifest" href="<%= asset_path('site.webmanifest') %>">
+      <link rel="mask-icon" href="<%= asset_path('safari-pinned-tab.svg') %>" color="#5bbad5">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Roboto:wght@700&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <%= yield %>
+      <%= link_to image_tag("whatsapp.svg"), "https://api.whatsapp.com/send?phone=+51929297202&text=Hola%2C+vengo+del+sitio+vicioperpetuo.com", class:"hover chat" %>
+      <div class="footer-container" style="background:#df0000;">
+         <div class="div-block-18-copy">
+            <div class="div-block-36"><a href="/terminos" class="link-2">Términos y Condiciones</a><img src="assets/arrow.svg" loading="lazy" alt="" class="image-12"></div>
+            <div class="div-block-36"><a href="/privacidad" class="link-2">Política de Privacidad</a><img src="assets/arrow.svg" loading="lazy" alt="" class="image-12"></div>
+         </div>
+         <div class="div-block-18-copy">
+            <div class="w-dyn-list">
+               <div role="list" class="w-dyn-items">
+                  <div role="listitem" class="w-dyn-item">
+                     <div class="div-block-36">
+                        <a href="tel:+51929297202" class="link-2 w-inline-block">
+                           <div>+51929297202</div>
+                        </a>
+                        <img src="assets/arrow.svg" loading="lazy" alt="" class="image-12">
+                     </div>
+                  </div>
+                  <div role="listitem" class="w-dyn-item">
+                     <div class="div-block-36">
+                        <a href="mailto:edicionesvicioperpetuo@gmail.com" class="link-2 w-inline-block">
+                           <div>edicionesvicioperpetuo@gmail.com</div>
+                        </a>
+                        <img src="assets/arrow.svg" loading="lazy" alt="" class="image-12">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="div-block-18-copy">
+            <div class="div-block-36"><a href="https://es-la.facebook.com/EdicionesVicioPerpetuoVicioPerfecto/" class="link-2"><img src="assets/facebook.svg" class="social-icon"> Facebook</a><img src="assets/arrow.svg" loading="lazy" alt="" class="image-12"></div>
+            <div class="div-block-36"><a href="https://www.instagram.com/edicionesvicioperpetuo/" class="link-2"><img src="assets/instagram.svg" class="social-icon"> Instagram</a><img src="assets/arrow.svg" loading="lazy" alt="" class="image-12"></div>
+         </div>
+      </div>
+      <div style="display:block;bottom:0px;left:0px;right:0px;height:2rem;position:relative;background-color:#000;color:white;text-align:center;vertical-align:middle;line-height:2rem">
+         <p>Diseñado por <a href="https://brutales.xyz" target="_blank" style="color:#fff;text-decoration:underline">brutales.xyz</a></p>
+      </div>
+   </body>
+</html>

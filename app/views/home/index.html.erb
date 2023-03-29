@@ -1,0 +1,292 @@
+<head>
+   <meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="og:title">
+   <meta content="https://vicioperpetuo.com" property="og:url">
+   <meta content="https://vicioperpetuo.fly.dev/assets/social.jpg" property="og:image">
+   <meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="og:description">
+   <meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="twitter:title">
+   <meta content="https://vicioperpetuo.com" property="twitter:url">
+   <meta content="https://vicioperpetuo.fly.dev/assets/social.jpg" property="twitter:image">
+   <meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="twitter:content">
+   
+   <style> body {padding: 0; margin: 0;} canvas {position:relative;top:0;left:0;vetical-align:top;} </style>
+   <style>
+      <!--<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js'%>
+      <%= javascript_include_tag 'danger.js'%>-->
+      .slider {
+      display: inline-block;
+      width: 100vw;
+      margin: 0 auto;
+      vertical-align: middle;
+      margin: 12.5vh 0vh;
+      }
+      .slider-item {
+      display: inline-block;
+      background-color: #fff;
+      padding: 91px 20px;
+      text-align: center;
+      min-height: 500px;
+      width: 21vw; /* You can adjust the width of your items */
+      border-radius: 21px;
+      user-select: none;
+      margin: 10px;
+      vertical-align: middle;
+      min-width: 300px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      }
+      .slider-item p{
+      margin:21px;
+      font-size:18px;
+      font-style:italic;
+      user-select:text;
+      }
+      .scroll {
+      margin: 15vh;
+      }
+      
+      .frame {
+      background-color: #000;
+      height: 25vh;
+      width: 100vw;
+      }
+
+      video {
+         margin-top:0%;
+         clip-path: inset(1px 1px);
+         width:100vw;
+      }
+
+      nav a{
+         padding:9px 21px;
+         border-radius:3px;
+      }
+
+      .cart{
+         padding:6px;
+      }
+      
+      
+
+      img#burguer{
+         position:fixed;
+         display:block;
+         top:5vw;
+         right:5vw;
+         height:32px;
+         z-index:1000;
+         background:#fff;
+         cursor:pointer;
+      }
+
+      #mobile-intro{
+         display:none;
+      }
+      
+
+      @media screen and (width: 768px) {
+         video {
+            margin-top:-12.5vh;
+            clip-path: inset(1px 1px);
+            width:100vw;
+            height:auto;
+         }
+         #intro{
+            display:none;
+         }
+         #mobile-intro{
+            display:block;
+         }
+         nav{
+            display:none;
+         }
+         .cart{
+            display:none;
+         }
+      }
+
+      @media screen and (width: 768px) {
+         video {
+            margin-top:-12.5vh;
+            clip-path: inset(1px 1px);
+            width:100vw;
+            height:auto;
+         }
+         #intro{
+            display:none;
+         }
+         #mobile-intro{
+            display:block;
+         }
+         nav{
+            display:none;
+         }
+         .cart{
+            display:none;
+         }
+      }
+
+      @media screen and (width: 820px) {
+         video {
+            margin-top:-12.5vh;
+            clip-path: inset(1px 1px);
+            width:100vw;
+            height:auto;
+         }
+         #intro{
+            display:none;
+         }
+         #mobile-intro{
+            display:block;
+         }
+         nav{
+            display:none;
+         }
+         .cart{
+            display:none;
+         }
+      }
+
+      @media screen and (max-width: 479px) {
+         video {
+            margin-top:0vh;
+            clip-path: inset(1px 1px);
+            width:auto;
+            height:100vh;
+         }
+         #intro{
+            display:none;
+         }
+         #mobile-intro{
+            display:block;
+         }
+      }
+
+   </style>
+   <script>
+      $(document).ready('ready page:load', function(){
+          
+      
+          $('#logo').hover(
+              function() {
+                  $(this).addClass('hover');
+              },
+              function() {
+                  $(this).removeClass('hover');
+              }
+          );
+          $('.menu-item').hover(
+              function() {
+                  $(this).addClass('hover');
+              },
+              function() {
+                  $(this).removeClass('hover');
+              }
+          );      
+      });
+   </script>
+</head>
+
+<div class="scroll-tracker"></div>
+<%= link_to image_tag("logo.svg"), info_path, id:"logo", class:"no-mobile fade-up logo hover", loading:"lazy", alt:"Vicio Perpetuo Vicio Perfecto" %>  
+
+<%= image_tag 'menu.svg', id:"burguer", class:"hover no-desktop" %>
+
+<div class="rmenu" style="display:none;">
+   <%= link_to image_tag("shop-cart.svg"), "#books", class:"hover fade-up cart no-mobile", loading:"lazy", style:"background-color:#fff !important" %>
+   <nav class="no-mobile fade-up">
+      <a href="info">NOSOTROS</a>
+      <a href="info#servicios">SERVICIOS</a>
+      <a href="autores">AUTORES</a>
+   </nav>
+</div>
+
+
+
+<video width="100%" autoplay muted loop nocontrols id="intro">
+  <source src="assets/videos/vpvp.mp4" type="video/mp4"> 
+</video>
+
+<video autoplay muted loop nocontrols id="mobile-intro">
+  <source src="assets/videos/vpvpmobile.mp4" type="video/mp4"> 
+</video>
+
+<div>
+   <center id="menu">
+      <div class="fade-up menu p-5 mx-auto">
+         <%= link_to "Narrativa", narrativa_path, class:"hover menu-item" %>
+         <%= link_to "Poesía", poesia_path, class:"hover menu-item" %>
+         <%= link_to "Cuento", cuento_path, class:"hover menu-item" %>
+         <%= link_to "Novela", novela_path, class:"hover menu-item" %>
+         <%= link_to "Ensayo", ensayo_path, class:"hover menu-item" %>
+      </div>
+   </center>
+   <center id="books">
+      <%= link_to image_tag("covers/mins/decomplicetenemosalaluna.png"), decomplicetenemosalaluna_path, loading:"lazy", class:"hover", dataAos:"fade-up" %>
+      <%= link_to image_tag('covers/mins/elnovelistayeltrompo.png'), elnovelistayeltrompo_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/lapaginaqueescribimos.png'), lapaginaqueescribimos_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/oidossordos.png'), oidossordos_path, loading:"lazy", class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mins/elembajador.png'), elembajador_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/fuegodeceniza.png'), fuegodeceniza_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/deamorisessentia.png'), deamorisessentia_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/elrevesdelcirculodebabel.png'), elrevesdelcirculodebabel_path, loading:"lazy", class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mins/acleman.png'), acleman_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/cuentaconmigoversocontigo.png'), cuentaconmigoversocontigo_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/todaslasvoces.png'), todaslasvoces_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/tiempodetenido.png'), tiempodetenido_path, loading:"lazy", class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mins/alpiedeldesierto.png'), alpiedeldesierto_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/andandoencuentos.png'), andandoencuentos_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/buscandoavenus.png'), buscandoavenus_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/celebraciondeltiempo.png'), celebraciondeltiempo_path, loading:"lazy", class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mins/vozcelestial.png'), vozcelestial_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/cosasquesucedencuentosfantasticos.png'), cosasquesucedencuentosfantasticos_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/dialogospostumos.png'), dialogospostumos_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/gotasobrepiedra.png'), gotasobrepiedra_path, loading:"lazy", class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mins/lanuevaola.png'), lanuevaola_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/lacomarcayotrosrelatos.png'), lacomarcayotrosrelatos_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/linda.png'), linda_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/masalladondetodonace.png'), masalladondetodonace_path, loading:"lazy", class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mins/mutilada.png'), mutilada_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/nuncaensillesauncaballovirtual.png'), nuncaensillesauncaballovirtual_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/paramiamantesustituta.png'), paramiamantesustituta_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/sacrificiodeamor.png'), sacrificiodeamor_path, loading:"lazy", class:"hover" %>
+      <br>
+      <%= link_to image_tag('covers/mins/sensaciones.png'), sensaciones_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/sinfonialirica.png'), sinfonialirica_path, loading:"lazy", class:"hover" %>
+      <%= link_to image_tag('covers/mins/sobresaltadosueno.png'), sobresaltadosueno_path, loading:"lazy", class:"hover" %>
+   </center>
+   <div class="frame"></div>
+   <div class="slider">
+      <center>
+         <div class="slider-item hover">
+            <p>"He comprado libros varias veces en Vicio Perpetuo y siempre he tenido una experiencia satisfactoria. Los precios son excelentes, hay muchas opciones de pago y los libros los recibí casi inmediatamente."</p>
+            <div>
+               <center><%= image_tag 'clientes/jahir_rios.jpg', class:"cliente-img" %></center>
+               Jahir Ríos
+            </div>
+            <span>@jahirriosllano</span>
+         </div>
+         <div class="slider-item hover">
+            <p>"Como compradora de Vicio Perpetuo, mi experiencia fue excelente. Compré una selección de libros nuevos para mi familia y quedé impresionada con la variedad de opciones de alta calidad y los precios competitivos. Recomiendo altamente a Vicio Perpetuo Vicio Perfecto como una fuente confiable para adquirir buenos libros."</p>
+            <div>
+               <center><%= image_tag 'clientes/gabriela_olivares.jpg', class:"cliente-img" %></center>
+               Gabriela Olivares
+            </div>
+            <span>@gaby.renaware</span>
+         </div>
+         <div class="slider-item hover">
+            <p>"vicioperpetuo.com es genial! Tiene una gran selección de títulos e incluso organizan eventos constantemente. El sitio web es muy intuitivo con fácil navegación entre categorías y autores."</p>
+            <div>
+               <center><%= image_tag 'clientes/manuel_gutarra.jpg', class:"cliente-img" %></center>
+               Manuel Gutarra
+            </div>
+            <span>@gutarramanuel</span>
+         </div>
+      </center>
+   </div>
+</div>

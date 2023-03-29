@@ -1,0 +1,11 @@
+class FormsController < ApplicationController
+  def create
+    email = params[:email]
+    phone = params[:phone]
+    operation_code = params[:operation_code]
+
+    ContactMailer.contact_email(email, phone, operation_code).deliver_now
+
+    # redirect to a success page or do something else
+  end
+end
