@@ -1,4 +1,4 @@
-# vicioperpetuo.com site
+# vicioperpetuo.com
 
 Virtual Book Store with 3 payment methods: Yape, Plin and Bitcoins
 
