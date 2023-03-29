@@ -1,24 +1,8 @@
-# README
+# vicioperpetuo.com site
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Virtual Book Store with 3 payment methods: Yape, Plin and Bitcoins
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby on Rails
+* Javascript
+* HTML5
+* CSS3
