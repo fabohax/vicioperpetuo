@@ -1,13 +1,36 @@
+<head>
+   <title><%= @bookTitle %>" de <%= @bookAuthor %> | Vicio Perpetuo Vicio Perfecto</title>
+<meta property="og:title" content="Vicio Perpetuo Vicio Perfecto | Editorial">
+<meta property="og:url" content="https://vicioperpetuo.com">
+<meta property="og:image" content="https://vicioperpetuo.com/public/vicio.png">
+<meta property="og:description" content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú.">
+<meta property="twitter:title" content="Vicio Perpetuo Vicio Perfecto | Editorial">
+<meta property="twitter:url" content="https://vicioperpetuo.com">
+<meta property="twitter:image" content="https://vicioperpetuo.com/public/vicio.png">
+<meta property="twitter:description" content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú.">
+
+<script>$(document).ready((function(){$("#logo").hover((function(){$(this).addClass("hover")}),(function(){$(this).removeClass("hover")})),$(".menu-item").hover((function(){$(this).addClass("hover")}),(function(){$(this).removeClass("hover")}));const o=$("#burguer"),n=$("#menu"),e=$("#close");o.click((function(){n.fadeIn(500)})),e.on("click",(function(){n.hide()}))}));</script>
+</head>
+
+
 <%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"no-mobile logo" %>  
 
-<meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="og:title">
-   <meta content="https://vicioperpetuo.com" property="og:url">
-   <meta content="https://vicioperpetuo.fly.dev/assets/social.jpg" property="og:image">
-   <meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="og:description">
-   <meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="twitter:title">
-   <meta content="https://vicioperpetuo.com" property="twitter:url">
-   <meta content="https://vicioperpetuo.fly.dev/assets/social.jpg" property="twitter:image">
-   <meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="twitter:content">
+<%= display_meta_tags(
+   description: yield(:description),
+   keywords: yield(:keywords),
+   og: {
+     title: yield(:title),
+     description: yield(:description),
+     url: request.original_url,
+     image: yield(:image)
+   }
+ ) %>
+
+<% content_for :title, @bookTitle %>
+<% content_for :description, @bookDescription %>
+<% content_for :keywords, @bookGender %>
+<% content_for :image, image_url("covers/#{ @bookID }.png") %>
+
 
 <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered" role="document">
@@ -50,7 +73,7 @@
                   <p>
                   <div id="Yape" class="paybox yape"><%= image_tag 'yape_vicio.svg' %>Transferir <%= @bookPrice %> PEN a 929297202 y capturar pantalla de la operación.</div>
                   <div id="Plin" class="paybox plin"><%= image_tag 'plin_vicio.svg' %>Transferir <%= @bookPrice %> PEN a 929297202 y capturar pantalla de la operación.</div>
-                  <div id="Bitcoin" class="paybox bitcoin mb-3"><%= image_tag 'bits_vicio.png', style:'width:100%' %>Transferir 30 000 satoshis a bc1qpgelupwfppcrzhaphkerf3l852fj8awg3w0fcm y capturar pantalla de la operación.</div>
+                  <div id="Bitcoin" class="paybox bitcoin mb-3"><%= image_tag 'bits_vicio.png', style:'width:100%' %>Transferir 30 000 satoshis a 17oFiMQQqCK4mr19gV7VKKg7RWCLZ6xuGp y capturar pantalla de la operación.</div>
                   </p>
                   <p>
                      <input type="email" class="form-control mb-3" id="email" placeholder="Correo electrónico">               
@@ -62,18 +85,11 @@
          <!-- WhatsApp Link Generator -->
          <script>
             function sendPayForm() {
-              // Get the form input values
               const bookTitle = document.getElementById('book-name').textContent;
               const paymentMethod = document.getElementById('payment-method').value;
               const email = document.getElementById('email').value;
-            
-              // Generate the WhatsApp message with input values
               const message = `Hola, quiero adquirir ${bookTitle}, ya hice el pago vía ${paymentMethod}, mi correo es ${email} y adjunto a continuación la captura del pago realizado.`;
-            
-              // Generate the WhatsApp link with the message
               const whatsappLink = `https://wa.me/51929297202/?text=${encodeURIComponent(message)}`;
-            
-              // Open the WhatsApp link in a new tab
               window.open(whatsappLink, '_blank');
             }
          </script>

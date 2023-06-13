@@ -1,38 +1,85 @@
-<div class="scroll-tracker"></div>
+<head>
+<title>Autores | Vicio Perpetuo Vicio Perfecto</title>
+<meta property="og:title" content="Vicio Perpetuo Vicio Perfecto | Editorial">
+<meta property="og:url" content="https://vicioperpetuo.com">
+<meta property="og:image" content="https://vicioperpetuo.com/public/vicio.png">
+<meta property="og:description" content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú.">
+<meta property="twitter:title" content="Vicio Perpetuo Vicio Perfecto | Editorial">
+<meta property="twitter:url" content="https://vicioperpetuo.com">
+<meta property="twitter:image" content="https://vicioperpetuo.com/public/vicio.png">
+<meta property="twitter:description" content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú.">
 
-<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"fade-up logo", loading:"lazy", alt:"Vicio Perpetuo Vicio Perfecto" %>  
-<%= link_to image_tag("shop-cart.svg"), "/vicioperfecto#books", class:"fade-up cart no-mobile", loading:"lazy", style:"background-color:#fff !important" %>
-<nav class="fade-up">
-    <a href="info">NOSOTROS</a>
-    <a href="info#servicios">SERVICIOS</a>
-    <a href="autores">AUTORES</a>
-</nav>
+<script>$(document).ready((function(){$("#logo").hover((function(){$(this).addClass("hover")}),(function(){$(this).removeClass("hover")})),$(".menu-item").hover((function(){$(this).addClass("hover")}),(function(){$(this).removeClass("hover")}));const o=$("#burguer"),n=$("#menu"),e=$("#close");o.click((function(){n.fadeIn(500)})),e.on("click",(function(){n.hide()}))}));</script>
+</head>
+
+
+<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"no-mobile fade-up logo", loading:"lazy", alt:"Vicio Perpetuo Vicio Perfecto" %>  
+
+
 
 <style>
     #autores-container{
-        margin:25vh 0vw;
+        display:block;
+        margin:12.5vh 0vw;
         width:100vw;
+        text-align:center;
+    }
+    #autores-container h1{
+        margin-bottom:15vh;
     }
     .autor{
-        width:16vw;        
+        display:block;
+        height:auto;            
     }
+
     span{
-        margin:5vh;
+        display:block;
+        margin:1vh 0vh 15vh;
+        text-align:center;
+        font-family:'Libre Baskerville', serif;
+        font-weight: bolder;
+        font-size:1.5em;
+    }
+
+
+    .autor img{
+        text-align:center;
+        height:25vh;  
+        width:25vh;
+        display:inline-block;
+        border-radius:100vh;
+        margin-bottom:21px;
+    }
+
+    @media screen and (width:393px){
+        #autores-container{
+            display:block;
+            width:100vw;
+        }
+        .autor{
+            position:static;
+            display:block;
+            height:100vw;
+            width:100vw;    
+            text-align:center;    
+        }
+        .autor img{
+            display:block;
+            height:72vw;
+            width:72vw;
+            text-align:center;    
+        }
     }
 </style>
 
 
 <div id="autores-container" class="fade-up">
-    <center><h1>Autores</h1></center>
-    <center>
+    <center><h1>Autores</h1> 
     <div class="autor">
-        <center><%= image_tag "autores/addhemar_sieralta.jpg", class:"hover" %></center>
-        <span>Addhemar Sieralta</span>
+        <center><%= image_tag "autores/addhemar_sierralta.jpg", class:"hover" %></center>
+        <span>Addhemar Sierralta</span>
     </div>
-    <div class="autor">
-        <center><%= image_tag "autores/luciano_acleman.jpg", class:"hover" %></center>
-        <span>Luciano Ácleman</span>
-    </div>
+    
     <div class="autor">
         <center><%= image_tag "autores/cesar_blanco.jpg", class:"hover" %></center>
         <span>César Blanco</span>
@@ -72,6 +119,10 @@
         <span>Juan José Cavero</span>
     </div>
     <div class="autor">
+        <center><%= image_tag "autores/luciano_acleman.jpg", class:"hover" %></center>
+        <span>Luciano Ácleman</span>
+    </div>
+    <div class="autor">
     <center><%= image_tag "autores/luis_enrique_mendoza.jpg", class:"hover" %></center>
         <span>Luis Enrique Mendoza</span>
     </div>
@@ -82,7 +133,7 @@
     </div>
     <div class="autor">
     <center><%= image_tag "autores/marino_quinto.jpg", class:"hover" %></center>
-        <span>Manuel Arbocco</span>
+        <span>Marino Quinto</span>
     </div>
     <div class="autor">
     <center><%= image_tag "autores/manuel_navazar.jpg", class:"hover" %></center>
@@ -90,7 +141,7 @@
     </div>
     <div class="autor">
     <center><%= image_tag "autores/manuel_arbocco.jpg", class:"hover" %></center>
-        <span>Manuel Arbocco</span>
+        <span>Marino Arbocco</span>
     </div>
     <br>
     <div class="autor">
@@ -120,7 +171,7 @@
     </div>
     
     <div class="autor">
-    <center><%= image_tag "autores/marino_quinto.jpg", class:"hover" %></center>
+    <center><%= image_tag "autores/teodoro_guzman.jpg", class:"hover" %></center>
         <span>Teodoro Guzmán</span>
     </div>
     <div class="autor">
@@ -131,5 +182,5 @@
         <center><%= image_tag "autores/winston_orrillo.jpg", class:"hover" %></center>
         <span>Winston Orrillo</span>
     </div>
-    </center>
+    </center>   
 </div>

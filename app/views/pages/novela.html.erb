@@ -1,27 +1,29 @@
-<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"logo" %>  
-<nav>
-    <a href="info">EDITORIAL</a>
-    <a href="info#servicios">SERVICIOS</a>
-    <a href="autores">AUTORES</a>
-</nav>
+<title>Novela | Vicio Perpetuo Vicio Perfecto</title>
+<meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="og:title">
+<meta content="https://vicioperpetuo.com" property="og:url">
+<meta content="https://vicioperpetuo.com/public/vicio.png" property="og:image">
+<meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="og:description">
+<meta content="Vicio Perpetuo Vicio Perfecto | Editorial" property="twitter:title">
+<meta content="https://vicioperpetuo.com" property="twitter:url">
+<meta content="https://vicioperpetuo.com/public/vicio.png" property="twitter:image">
+<meta content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." property="twitter:content">
+<script>$(document).ready((function(){$("#logo").hover((function(){$(this).addClass("hover")}),(function(){$(this).removeClass("hover")})),$(".menu-item").hover((function(){$(this).addClass("hover")}),(function(){$(this).removeClass("hover")}));const o=$("#burguer"),n=$("#menu"),e=$("#close");o.click((function(){n.fadeIn(500)})),e.on("click",(function(){n.hide()}))}));</script>
+<%= link_to image_tag("logo.svg"), vicioperfecto_path, class:"no-mobile logo" %>  
+
 <div class="parallax">
+
    <center>
-      <video autoplay muted loop id="intro" class="mx-auto no-mobile">
-         <source src="<%= asset_path('vpvp.mp4') %>" type="video/mp4">
-         Your browser does not support the video tag.
-      </video>
-   </center>
-   <center>
-      <div class="menu p-5 mx-auto">
+      <div class="menu p-5 mx-auto fade-up">
          <%= link_to "Narrativa", narrativa_path %>
          <%= link_to "Poesía", poesia_path %>
          <%= link_to "Cuento", cuento_path %>
-         <%= link_to "Novela", novela_path %>
+         <%= link_to "Novela", novela_path, style:"color:red" %>
          <%= link_to "Ensayo", ensayo_path %>
       </div>
    </center>
-   <center id="books">
-      <%= link_to image_tag('covers/elnovelistayeltrompo.png'), elnovelistayeltrompo_path, class:"hover" %>
+   <center id="books" class="fade-up">
+      <%= link_to image_tag('covers/elrevesdelcirculodebabel.png'), elrevesdelcirculodebabel_path, class:"hover" %>
+      <%= link_to image_tag('covers/paramiamantesustituta.png'), paramiamantesustituta_path, class:"hover" %>
       <%= link_to image_tag('covers/oidossordos.png'), oidossordos_path, class:"hover" %>
       <br>
       <%= link_to image_tag('covers/elembajador.png'), elembajador_path, class:"hover" %>
