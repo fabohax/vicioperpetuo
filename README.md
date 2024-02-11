@@ -1,6 +1,6 @@
 # VicioPerpetuo
 
-Este es un proyecto de una tienda virtual de libros llamada VicioPerpetuo. La tienda acepta tres métodos de pago: Yape, Plin y Bitcoin.
+Este es un proyecto de una tienda virtual de la editorial peruana "Vicio Perpetuo Vicio Perfecto". La tienda acepta tres métodos de pago: Yape, Plin y Bitcoin.
 
 ## Tecnologías Utilizadas
 
