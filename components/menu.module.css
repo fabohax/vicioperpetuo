@@ -1,0 +1,37 @@
+/* components/menu.module.css */
+.menuIcon {
+    position: fixed;
+    display:block;
+    top: .72rem;
+    right: 1rem;
+    cursor: pointer;
+    z-index:1000;
+  }
+  
+  .menuContainer {
+    text-align: right;
+    top:0;
+    font-size: 3xl;
+    position: fixed;
+    height:100vh;
+    width: 100vw;
+    right: -100vw;
+    transition: right 0.75s ease; 
+    z-index:1000;
+    border:1px solid #111;
+    padding-top:5em;
+    padding-right:5em;
+    padding-bottom:3em;
+    border-radius:1em;
+  }
+  
+  .menuContainer.open {
+    right: 0;
+    z-index:0;
+    backdrop-filter: blur(15px);
+  }
+  
+  .inverted {
+    color: #000;
+  }
+  

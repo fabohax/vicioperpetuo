@@ -1,0 +1,20 @@
+.marquee {
+  overflow: hidden; /* Essential to hide overflowing content */
+  white-space: nowrap; /* Keep text on a single line */
+  z-index: 25;
+}
+
+.marquee-content {
+  display: inline-block; /* Allow animation */
+  animation: marquee 15s linear infinite; /* Adjust duration for speed */
+}
+
+/* Keyframes for the animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); 
+  }
+}

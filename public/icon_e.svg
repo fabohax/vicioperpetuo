@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Capa_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 100 100"
+   style="enable-background:new 0 0 100 100;"
+   xml:space="preserve"
+   sodipodi:docname="icon_e.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs11"><filter
+     id="mask-powermask-path-effect1984_inverse"
+     inkscape:label="filtermask-powermask-path-effect1984"
+     style="color-interpolation-filters:sRGB"
+     height="100"
+     width="100"
+     x="-50"
+     y="-50"><feColorMatrix
+       id="mask-powermask-path-effect1984_primitive1"
+       values="1"
+       type="saturate"
+       result="fbSourceGraphic" /><feColorMatrix
+       id="mask-powermask-path-effect1984_primitive2"
+       values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+       in="fbSourceGraphic" /></filter><filter
+     id="mask-powermask-path-effect2004_inverse"
+     inkscape:label="filtermask-powermask-path-effect2004"
+     style="color-interpolation-filters:sRGB"
+     height="100"
+     width="100"
+     x="-50"
+     y="-50"><feColorMatrix
+       id="mask-powermask-path-effect2004_primitive1"
+       values="1"
+       type="saturate"
+       result="fbSourceGraphic" /><feColorMatrix
+       id="mask-powermask-path-effect2004_primitive2"
+       values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+       in="fbSourceGraphic" /></filter><filter
+     id="mask-powermask-path-effect2032_inverse"
+     inkscape:label="filtermask-powermask-path-effect2032"
+     style="color-interpolation-filters:sRGB"
+     height="100"
+     width="100"
+     x="-50"
+     y="-50"><feColorMatrix
+       id="mask-powermask-path-effect2032_primitive1"
+       values="1"
+       type="saturate"
+       result="fbSourceGraphic" /><feColorMatrix
+       id="mask-powermask-path-effect2032_primitive2"
+       values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+       in="fbSourceGraphic" /></filter></defs><sodipodi:namedview
+   id="namedview9"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:pageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   showgrid="false"
+   inkscape:zoom="4.7"
+   inkscape:cx="50"
+   inkscape:cy="49.893617"
+   inkscape:window-width="1366"
+   inkscape:window-height="704"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Capa_1" />
+<style
+   type="text/css"
+   id="style2">
+	.st0{fill:#E30613;stroke:#E30613;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#FFFFFF;stroke-width:9;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+
+
+<path
+   id="rect1192"
+   style="opacity:1;vector-effect:none;fill:#d40000;fill-rule:evenodd;stop-color:#000000;stop-opacity:1"
+   d="m 21.544215,9.2686167 h 56.240027 c 6.574145,0 11.866688,5.2925433 11.866688,11.8666883 v 56.240027 c 0,6.574145 -5.292543,11.866689 -11.866688,11.866689 H 21.544215 c -6.574145,0 -11.8666885,-5.292544 -11.8666885,-11.866689 V 21.135305 c 0,-6.574145 5.2925435,-11.8666883 11.8666885,-11.8666883 z" /><path
+   style="color:#000000;fill:#ffffff;-inkscape-stroke:none"
+   d="M 10.03125,8.9160156 9.3242188,9.6230469 89.296875,89.595703 90.003906,88.888672 Z"
+   id="path1307" /><path
+   style="color:#000000;fill:#ffffff;-inkscape-stroke:none"
+   d="M 89.296875,8.9160156 9.3242188,88.888672 10.03125,89.595703 90.003906,9.6230469 Z"
+   id="path1994" /></svg>

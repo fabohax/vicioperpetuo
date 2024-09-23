@@ -1,0 +1,674 @@
+[
+  {
+    "imgurl": "bicentenario",
+    "title": "200",
+    "author": "Antología de Poesía Contemporánea",
+    "description": "Esta antología recoge los mejores poemas escritos por autores de México, Argentina, Chile, Puerto Rico, Venezuela y Perú desde la generación del 60 hasta la generación del 2020.",
+    "price": 30,
+    "gender": "Poesía",
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 164,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "acleman",
+    "title": "Ácleman",
+    "author": "Luciano Ácleman",
+    "description": "Esta antología recoge los mejores poemas escritos por el autor.",
+    "price": 30,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 164,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "alpiedeldesierto",
+    "title": "Al pie del desierto",
+    "author": "Alberto Benavides Ganoza",
+    "description": "Este poemario es un homenaje a la vida retirada, a la amistad, al amor, al campo y al quechua, el poeta lo escribió a modo de oda a la vida retirada.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2020,
+    "pages": 80,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "andandoencuentos",
+    "title": "Andando en cuentos",
+    "author": "Antología de Poesía Contemporánea",
+    "description": "Este libro reúne 27 voces disimiles que retratan con su registro narrativo lo mejor del cuento peruano. Al abrir este tesoro encontraremos autores de la generación del 60 y conforme avancemos también nos topamos con autores de la novísima generación de 2010.",
+    "price": 30,
+    "gender": "Cuento",
+    
+    "isbn": "9786124289293",
+    "year": 2021,
+    "pages": 130,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "buscandoavenus",
+    "title": "Buscando a Venus",
+    "author": "Julio Benavides Parra",
+    "description": "Este libro nos acerca a los cuentos de terror que escuchábamos de niños y que nos escarapelaban los nervios. Incluye historias que te pasaron a ti o a algún amigo, confesiones sobre la muerte, testimonios sobre la destrucción del mundo, un cuento sobre jóvenes bohemios, premoniciones, un gallito travieso y entrañable llamado Ludovico, un cuento ecológico, testimonios sobre los efectos de la televisión y la búsqueda de la mujer ideal. La búsqueda de Venus ha comenzado en cada página, donde se va pintando este hermoso cuadro de belleza in extremis, de esta vigorosa muestra de exquisita narrativa.",
+    "price": 20,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2015,
+    "pages": 55,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "nuncaensillesauncaballovirtual",
+    "title": "Nunca ensilles a un caballo virtual",
+    "author": "Gustavo Espejo Landauro",
+    "description": "Relatos que tratan nos mostrarnos la relación difícil que tiene la tecnología y el hombre. Una relación esclavizante y asfixiante.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 78,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "celebraciondeltiempo",
+    "title": "Celebración del Tiempo",
+    "author": "Eduardo Arroyo",
+    "description": "Este libro es un homenaje a la amistad y a los 50 años de poesía de un gran autor. Cada poema incluido tiene una dedicatoria.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2020,
+    "pages": 80,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "companiaeterna",
+    "title": "Compañía Eterna",
+    "author": "Colección Bicentenario",
+    "description": "Este libro reúne textos de 38 autores de Hispanoamérica, desde la generación del 60 hasta el 2020, que nos muestran las diversas posibilidades de la narrativa escrita en países como España, México, Puerto Rico, Venezuela y Perú.",
+    "price": 40,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2022,
+    "pages": 204,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "cosasquesucedencuentosfantasticos",
+    "title": "Cosas que suceden... cuentos fantásticos",
+    "author": "Eduardo Borrero Vargas",
+    "description": "Este texto habla sobre la tendencia del hombre a ubicarse en el futuro y buscar respuestas a sus dudas y utopías, lo que ha llevado a una falta de interés en la novela realista. En cambio, los relatos hipotéticos que exploran la infinitud del tiempo cósmico, como los que desarrollaron Sagan y Asimov, tienen una fuerza especial en la literatura fantástica de Eduardo Borrero Vargas. La literatura fantástica ofrece una apertura hacia otras realidades, lo que resulta valioso en un mundo donde el escritor no está contento con lo que sucede alrededor de la llamada realidad. Los relatos cortos de 'Cosas que suceden... cuentos fantásticos' son una celebración de esta búsqueda de otras realidades y merecen nuestra atención en esta incierta posmodernidad.",
+    "price": 20,
+    "gender": "Cuento",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "cuentaconmigoversocontigo",
+    "title": "Cuenta conmigo, verso contigo",
+    "author": "Abdela Romero Herbozo",
+    "description": "Este libro incluye relatos que nos acercan al espíritu regionalista de los pueblos del norte de Lima, específicamente en la provincia de Huacho, así como poemas de corte interiorista.",
+    "price": 20,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 73,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "deamorisessentia",
+    "title": "De Amoris Essentia",
+    "author": "Manuel Alonso Navazar",
+    "description": "Este poemario está dividido en tres partes, en las cuales se desarrolla el amor a lo largo de la historia: los primeros amores, el amor en la adultez y el amor en la madurez. El amor es el tema principal y es homenajeado en todo el poemario.",
+    "price": 40,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2020,
+    "pages": 91,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "decomplicetenemosalaluna",
+    "title": "De cómplice tenemos a la luna",
+    "author": "Colección Bicentenario",
+    "description": "Esta antología de microcuentos, 'De cómplice tenemos a la luna', reúne a 50 autores y es un viaje imaginario por nuestro país y el mundo. Los autores provienen de lugares como Ayacucho, Piura, Arequipa, Cajamarca, Lima, Huancayo, Cusco, Huancavelica, Trujillo, Sullana, Callao, Jauja, Pacasmayo, Áncash, Chancay e Ica, así como de países como Argentina, Bolivia, Bosnia, Cuba, España, México, Puerto Rico y Venezuela. Este viaje lleno de travesías y muchas paradas, le permitirá deleitarse con lo mejor del microcuento contemporáneo escrito en los últimos 70 años.",
+    "price": 20,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2022,
+    "pages": 108,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+},
+    {
+    "imgurl": "dialogospostumos",
+    "title": "Diálogos póstumos",
+    "author": "Juan Andrés Gómez",
+    "description": "El autor, conocido por su trabajo en el teatro, presenta en este libro una propuesta poética en la que los personajes dialogan con la muerte y con el lector.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2014,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+    {
+    "imgurl": "elembajador",
+    "title": "El Embajador",
+    "author": "Leandro Meza",
+    "description": "Se trata de una novela que narra la historia de jóvenes aspirantes a marinos, quienes comienzan con travesuras inocentes para después verse envueltos en la corrupción que permea en esta institución y que termina por afectarlos.",
+    "price": 50,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2020,
+    "pages": 220,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+    {
+    "imgurl": "elnovelistayeltrompo",
+    "title": "El novelista y el trompo",
+    "author": "Enrique González Arias",
+    "description": "Este libro es una colección de cuentos cautivadores y emocionantes para adolescentes. Incluye historias sobre ciclismo, primer amor, fútbol y un tren que evoca recuerdos de la infancia de los protagonistas. Estas narraciones no solo entretienen, sino que también ofrecen reflexiones valiosas, convirtiéndolo en una lectura imprescindible para cualquier joven en busca de aventuras y crecimiento personal.",
+    "price": 20,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2013,
+    "pages": 80,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+    {
+    "imgurl": "elrevesdelcirculodebabel",
+    "title": "El revés del círculo de Babel",
+    "author": "Eduardo Borrero",
+    "description": "Esta novela presenta a un grupo de jóvenes adolescentes que estudian en una escuela dirigida por sacerdotes que los mantienen reprimidos. Los adolescentes, fascinados por el cine, escapan para ver a sus ídolos femeninos y así vivir aventuras, pero deben enfrentarse a una sociedad restrictiva y castradora. La historia comienza con el protagonista en coma, lo que nos permite adentrarnos en su pasado y conocer más acerca de su lucha contra esta sociedad opresiva.",
+    "price": 40,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 167,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+    {
+    "imgurl": "eurekateatro",
+    "title": "Eureka Teatro",
+    "author": "Ruth Vásquez García",
+    "description": "Este libro incluye cuatro entremeses que deleitarán al lector con lo mejor de la literatura. Apropiado para todas las edades, podremos disfrutar de 'El Gallinazo sin Plumas', 'Rosita' y 'Las Mariposas.'",
+    "price": 20,
+    "gender": "Dramaturgia",
+    
+    "isbn": "9786124289637",
+    "year": 2014,
+    "pages": 60,
+    "ratio": "14:10",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+    {
+    "imgurl": "fuegodeceniza",
+    "title": "Fuego de ceniza",
+    "author": "Ginger Santiago",
+    "description": "Estos poemas son cortos y tienen un tono romántico y erótico, en los que la poeta lleva al 'yo poético' a través de relaciones estables con su ser amado.",
+    "price": 20,
+    "gender": "Poesía",
+    "isbn": "9786124289637",
+    "year": 2020,
+    "pages": 80,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"      
+  },
+    {
+    "imgurl": "generacionbicentenario",
+    "title": "Generación Bicentenario",
+    "author": "Antología latinoamericana de microrelato",
+    "description": "Esta antología del microcuento latinoamericano presenta 42 autores y su magia en la literatura breve.",
+    "price": 20,
+    "gender": "Cuento",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+    {
+    "imgurl": "gotasobrepiedra",
+    "title": "Gota sobre piedra",
+    "author": "César Monge Durá",
+    "description": "Este libro es una colección de poemas que abordan las vivencias más significativas del autor, y además cuenta con una sección dedicada a haikus que evocan una larga tradición.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+      
+  },
+  {
+    "imgurl": "lacomarcayotrosrelatos",
+    "title": "La comarca y otros relatos",
+    "author": "Manuel Arboccó de los Heros",
+    "description": "Este libro está compuesto por 27 relatos, la mayoría de ellos breves, que se inspiran en Ribera y tienen un tratamiento psicológico similar al de Dostoievski. Además, hay un relato que rinde homenaje a 'La calle Morgue' de Poe.",
+    "price": 35,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "lacuarentena",
+    "title": "La cuarentena",
+    "author": "Colección Bicentenario",
+    "description": "Esta antología recoge los mejores microcuentos del país. Contiene varias temáticas en un solo libro, como el amor, el suspenso, el terror, lo histórico, lo ecológico, las anécdotas, los cuentos moralizantes, etc.",
+    "price": 10,
+    "gender": "Cuento",
+    
+    "isbn": "9786124289637",
+    "year": 2020,
+    "pages": 110,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "laluchaporlaansiadalibertad",
+    "title": "La lucha por la ansiada libertad",
+    "author": "Eduardo Ángel Benavides Parra",
+    "description": "Este libro contiene una colección de nueve ensayos que abordan temas como las libertades individuales, el narcotráfico, el terrorismo, las pandillas juveniles, el neoliberalismo y la libertad de trabajo, entre otros.",
+    "price": 40,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2022,
+    "pages": 108,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "lanuevaola",
+    "title": "La nueva ola",
+    "author": "Colección Bicentenario",
+    "description": "Libro con más de 30 autores desde la generación del 60 hasta la generación del 2010 tiene varios registros narrativos.",
+    "price": 30,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 160,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "laotraorilla",
+    "title": "La otra orilla",
+    "author": "Antología de cuento hispanoamericano",
+    "description": "Este libro de cuentos incluye a varios autores con temáticas variadas. Reúne 34 relatos de autores que desarrollan un universo casi ilimitado en sus propuestas.",
+    "price": 20,
+    "gender": "Cuento",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 138,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "lapaginaqueescribimos",
+    "title": "La página que escribimos",
+    "author": "Gustavo Espejo Landauro",
+    "description": "Este libro de poemas reúne textos que nos retratan el amor más tierno, el afecto familiar, los recuerdos y la amistad.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "lascallesdemialma",
+    "title": "Las calles de mi alma",
+    "author": "Melec Laguna Boza",
+    "description": "Este libro contiene poemas dedicados al padre ausente del autor, a su tierra natal de Paramonga, a su familia, a sus amigos y a sus luchas sindicales.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "linda",
+    "title": "Linda",
+    "author": "César Carbonel Cabrera",
+    "description": "La novela transcurre en Tarapoto y cuenta la historia de una estudiante que se enamora de su maestro, juntos recorren la selva del Perú y Ecuador en un memorable auto. La trama está enriquecida con elementos sobrenaturales y la magia que rodea estos lugares.",
+    "price": 30,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 130,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "masalladondetodonace",
+    "title": "Más allá, donde todo nace",
+    "author": "Max Cristian Huamán Pérez",
+    "description": "Este libro cuenta con 17 relatos que nos sumergen en el mundo andino, donde destacan la descripción detallada de una fiesta patronal, la historia de un joven que es obligado a casarse y sufre numerosos castigos, la narración de dos jóvenes enamorados con un final mágico y terrorífico, y un relato que cuenta la historia de unos niños que son víctimas de un matón, pero que logran cobrar venganza de manera ingeniosa.",
+    "price": 40,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 146,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "misdecimasyyo",
+    "title": "Mis décimas y yo",
+    "author": "Gustavo Espejo Landauro",
+    "description": "La décima es un género lírico originario de España, que ha llegado hasta nosotros a través de la conquista. Entre los autores de décimas destacados se encuentran políticos, Zambo Cavero, Facundo Cabral, entre otros.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2020,
+    "pages": 80,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "mutilada",
+    "title": "Mutilada",
+    "author": "Gustavo Espejo Landauro",
+    "description": "El poemario es una poderosa manifestación emocional en la que la poeta expresa su desasosiego, descontento, decepción amorosa y una vorágine de sensaciones intensas.",
+    "price": 20,
+    "gender": "Poesía",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 60,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "imgurl": "oidossordos",
+    "title": "Oídos Sordos",
+    "author": "Julio Benavides Parra",
+    "description": "Esta novela nos lleva de regreso al tiempo de la dictadura para narrar una gran historia: la vida de Alcides Chinchorro, el dilema de Anita y la relación entre María y José.",
+    "price": 20,
+    "gender": "Narrativa",
+    
+    "isbn": "9786124289637",
+    "year": 2021,
+    "pages": 79,
+    "ratio": "14:21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Para mi amante sustituta",
+    "author": "Ricardo Alonso More Juárez",
+    "description": "Liam conoce a Lizan, su amor ideal, pero sus errores al seducir a otras mujeres lo llevan a terminar de manera violenta su relación con ella. La aparición de muchas otras mujeres que seduce lo llevan a ser visto como un escritor maldito sin suerte en el amor.",
+    "price": "50",
+    "gender": "Narrativa",
+    
+    "imgurl": "paramiamantesustituta",
+    "isbn": "9786124289637",
+    "year": "2021",
+    "pages": "250",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Sacrificio de amor",
+    "author": "Ángelo Torres",
+    "description": "Este libro de poemas aborda temas como el amor, el sufrimiento, el dolor y la muerte.",
+    "price": "20",
+    "gender": "Poesía",
+    
+    "imgurl": "sacrificiodeamor",
+    "isbn": "9786124289637",
+    "year": "2022",
+    "pages": "40",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Sensaciones I",
+    "author": "Nelson Cardoza",
+    "description": "Estos 3 relatos te transportarán a la etapa más tierna de la vida, donde el amor adolescente y juvenil son protagonistas junto a otros temas relevantes de esta época.",
+    "price": "20",
+    "gender": "Poesía",
+    
+    "imgurl": "sensaciones",
+    "isbn": "9786124289637",
+    "year": "2021",
+    "pages": "57",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Sinfonía Lírica",
+    "author": "Muestra de poesía total",
+    "description": "Nuestro sello presenta esta antología anual con 61 poetas de todas las generaciones, desde la del 40 hasta la más reciente del 2020. Son multitemáticos.",
+    "price": "40",
+    "gender": "Poesía",
+    
+    "imgurl": "sinfonialirica",
+    "isbn": "9786124289637",
+    "year": "2020",
+    "pages": "240",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Sobresaltado sueño",
+    "author": "Antología de sueños y pesadillas",
+    "description": "Este libro consta de 36 relatos que exploran el tema recurrente y perturbador de las pesadillas en nuestra vida cotidiana. A través del terror y el suspenso, cada historia te llevará a un mundo de sueños oscuros y perturbadores.",
+    "price": "40",
+    "gender": "Poesía",
+    
+    "imgurl": "sobresaltadosueno",
+    "isbn": "9786124289637",
+    "year": "2021",
+    "pages": "200",
+    "ratio": "14 x 21",
+    "editorial": "Ediciones Infinito"
+  },
+  {
+    "title": "Todas las voces",
+    "author": "Muestra de poesía mundial",
+    "description": ".",
+    "price": "40",
+    "gender": "Poesía",
+    
+    "imgurl": "todaslasvoces",
+    "isbn": "9786124289637",
+    "year": "2021",
+    "pages": "188",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Vértigo",
+    "author": "Marco Martos",
+    "description": "Este libro de poemas está dedicado a la naturaleza, a los animales, al amor y al mundo antiguo. El poeta es como un orfebre que nos muestra en estos textos la fuerza de su poética.",
+    "price": "20",
+    "gender": "Poesía",
+    
+    "imgurl": "vertigo",
+    "isbn": "9786124289637",
+    "year": "2020",
+    "pages": "60",
+    "ratio": "14 x 18",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Vespertilio",
+    "author": "Marco Martos",
+    "description": "Son poemas barrocos y exquisitos en homenaje al cine, al ajedrez y al Perù.",
+    "price": "20",
+    "gender": "Poesía",
+    
+    "imgurl": "vespertilio",
+    "isbn": "9786124289637",
+    "year": "2021",
+    "pages": "60",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },    
+  {
+    "title": "Antología Voz Celestial Poesía Total",
+    "author": "Colección Bicentenario",
+    "description": "Esta antología recoge una selección de los mejores poemas de autores de Hispanoamérica desde la generación del 60 hasta la más reciente generación 2020, ofreciendo lo mejor de su lírica en este libro.",
+    "price": "30",
+    "gender": "Poesía",
+    
+    "imgurl": "vozcelestial",
+    "isbn": "9786124289637",
+    "year": "2022",
+    "pages": "168",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Presencia Tenebrosa",
+    "author": "Varios Autores",
+    "description": "Esta antología es una colección de textos de destacados autores de Hispanoamérica, incluyendo voces literarias de Cuba, España, Venezuela y Perú. Estos escritores, con edades que abarcan desde los 20 hasta los 80 años, han tejido historias donde el horror, el suspenso, lo trágico, el temor, lo policial y lo psicológico se entrelazan en cada relato. La intensidad de esta narrativa sin duda dejará una impresión perdurable en su vida.",
+    "price": "30",
+    "gender": "Poesía",
+    
+    "imgurl": "presenciatenebrosa",
+    "isbn": "9786124921582",
+    "year": "2023",
+    "pages": "146",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "El sentir de la vida",
+    "author": "Elizabeth Caballero",
+    "description": "Soñar con un amor imposible, amar intensamente, besar a la madre, recordar a su padre y tener a Dios como el súmmum de todo en la vida son perspectivas que este poemario abarca.",
+    "price": "40",
+    "gender": "Poesía",
+    
+    "imgurl": "elsentirdelavida",
+    "isbn": "9786124921568",
+    "year": "2023",
+    "pages": "91",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Podcasters Peruanos en Cuarentena",
+    "author": "Luis Enrique Mendoza",
+    "description": "Mediante la plataforma de los podcasters recorreremos las experiencias de cada uno de nosotros en tres días cruciales en la vida de cada uno de nosotros.",
+    "price": "40",
+    "gender": "Poesía",
+    
+    "imgurl": "podcastersperuanos",
+    "isbn": "9786124921568",
+    "year": "2023",
+    "pages": "101",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Rumbo al infinito de la propia voz",
+    "author": "Gonzalo Dávila",
+    "description": "Este poemario es vanguardista, moderno, atrevido, inventa nuevas formas de explorar la poesía, juega con el sonido, alterna voces guturales, onomatopéyicas y se expande como un mundo en crecimiento para cernir en su contenido la historia de la humanidad, personajes y religiones.",
+    "price": "50",
+    "gender": "Poesía",
+    
+    "imgurl": "rumboalinfinitodelapropiavoz",
+    "isbn": "9786124921575",
+    "year": "2023",
+    "pages": "301",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "La Melancolía",
+    "author": "Gonzalo Dávila",
+    "description": "Este poemario con línea narrativa desarrolla en su mayoría texto de aliento largo a manera de grandes frazadas de palabras la sociedad y los personajes típicos de varios parajes del mundo.",
+    "price": "40",
+    "gender": "Poesía",
+    
+    "imgurl": "lamelancolia",
+    "isbn": "9786124921544",
+    "year": "2023",
+    "pages": "251",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Las fronteras del sueño",
+    "author": "Gonzalo Dávila",
+    "description": "Esta antología recoge una selección de los mejores poemas de autores de Hispanoamérica desde la generación del 60 hasta la más reciente generación 2020, ofreciendo lo mejor de su lírica en este libro.",
+    "price": "20",
+    "gender": "Poesía",
+    
+    "imgurl": "lasfronterasdelsueno",
+    "isbn": "9786124921551",
+    "year": "2023",
+    "pages": "68",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  },
+  {
+    "title": "Tan solo entre tú y yo",
+    "author": "María Campos",
+    "description": "El amor, el sexo, el erotismo, la sensualidad, lo intenso, lo ardiente y el encuentro carnal en todas sus variables está expresado en este gran poemario.",
+    "price": "40",
+    "gender": "Poesía",
+    
+    "imgurl": "tansoloentretuyyo",
+    "isbn": "9786124921513",
+    "year": "2023",
+    "pages": "111",
+    "ratio": "14 x 21",
+    "editorial": "Vicio Perpetuo Vicio Perfecto"
+  }
+]
+  
