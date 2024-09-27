@@ -37,7 +37,7 @@ const BookDetails = ({ book }: { book: Book }) => {
       
       <h1 className="text-5xl font-bold">{title}</h1>
       <h2 className="text-2xl my-2">{author}</h2>
-      <p className="text-lg font-semibold">{price} PEN</p>
+      <p className="text-lg font-semibold">{price} S/.</p>
       
       <p className="my-8">{description}</p>
       

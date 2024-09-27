@@ -16,9 +16,9 @@ const Done = () => {
       <Menu dark="true" />
 
       {/* Thank You Message */}
-      <div className="flex flex-col justify-center items-center h-screen text-center px-4">
-        <h1 className="text-4xl font-bold my-4">¡Gracias por tu pedido!</h1>
-        <p className="text-xl mb-4">Hemos recibido tu orden. Te enviaremos un correo de confirmación pronto.</p>
+      <div className="lg:w-1/3 flex flex-col justify-center items-center h-screen text-center px-4 mx-auto">
+        <h1 className="text-4xl font-bold my-4">¡Gracias por tu interés!</h1>
+        <p className="text-xl mb-4">Estaremos procesando tu postulación y nos comunicaremos contigo pronto.</p>
         
         {/* Peruvian Literature Quote */}
         <blockquote className="italic text-lg text-center mt-6">

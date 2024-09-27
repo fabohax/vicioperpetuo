@@ -1,10 +1,15 @@
 // pages/servicios.tsx
+import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Menu from '@/components/menu';
+import PModal from '@/components/postularModal';
 
 export default function Servicios() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <>
       <Head>
@@ -69,12 +74,23 @@ export default function Servicios() {
             Nos encargamos de implementar estrategias publicitarias para mejorar la visibilidad del libro. Incluye técnicas creativas para su promoción, uso de medios digitales para llegar a un público amplio, creación de contenido exclusivo para compartir en redes sociales y mejorar su presencia en tiendas en línea. También se considera identificar mercados y públicos objetivos, establecer metas realistas para alcanzar el éxito editorial deseado y monitorear su progreso continuamente.
           </p>
 
+          <button  onClick={openModal}>
+          <div id="postular" className="inline-block mb-8 px-6 py-3 bg-[#222] text-white rounded-full text-lg mx-auto">
+            Publica con Nosotros
+          </div>
+          </button>
+          <br/>
+
           <Link href="https://api.whatsapp.com/send?phone=+51929297202&text=Hola%2C+vengo+del+sitio+vicioperpetuo.com">
             <div id="contactus" className="inline-block px-6 py-3 bg-[#25d366] text-white rounded-full text-lg mx-auto">
               Contáctanos por Whatsapp
             </div>
           </Link>
         </div>
+        <PModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
       </div>
     </>
   );

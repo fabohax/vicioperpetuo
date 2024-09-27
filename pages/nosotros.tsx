@@ -1,8 +1,13 @@
+import { useState } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 import Menu from '@/components/menu';
+import PModal from '@/components/postularModal'
 
 export default function Nosotros() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <>
       <div>
@@ -50,11 +55,19 @@ export default function Nosotros() {
             <div className='my-8 w-full'>
               <Link href="/servicios" className='underline text-center'>Revisa los servicios que ofrecemos</Link>
             </div>
+            <button onClick={openModal}
+              id="postular" className="items-center text-center border-[1px] border-[#fff] p-2 mb-8 block px-6 py-3 bg-[#333] text-white rounded-full text-lg mx-auto mx-auto">
+                Publica con Nosotros
+            </button>
             <Link href="https://api.whatsapp.com/send?phone=+51929297202&text=Hola%2C+vengo+del+sitio+vicioperpetuo.com">
               <div className="inline-block px-6 py-3 bg-[#25d366] text-white rounded-full text-lg">Contáctanos por Whatsapp</div>
             </Link>
           </div>
         </div>
+        <PModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
       </div>
     </>
   );

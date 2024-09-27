@@ -1,11 +1,17 @@
 // page.tsx
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/menu";
 import BookCovers from "@/components/BookCovers";
+import PModal from '@/components/postularModal'
 
 const Page = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <div>
       {/* Header */}
@@ -47,6 +53,14 @@ const Page = () => {
         </blockquote>
         <p className="mt-8 text-xl font-semibold">Marco Martos</p>
       </section>
+      <button onClick={openModal}
+        id="postular" className="items-center text-center border-[1px] border-[#fff] p-2 mb-8 block px-6 py-3 bg-[#f4510ff] text-white rounded-full text-lg mx-auto hover:underline mx-auto">
+          Publica con Nosotros
+      </button>
+      <PModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 };

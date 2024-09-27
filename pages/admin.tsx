@@ -82,11 +82,11 @@ export default function Admin() {
 
   if (session) {
     return (  
-      <div className="">
+      <div className="lg:py-16">
         
           <div className="flex flex-row fixed top-8 left-8 gap-2 space-x-8 backdrop-blur bg-white/30">
             <div>👤 <Link href="/admin" className="hover:underline">
-              {session?.user?.email?.split('@')[0] || 'NN'}
+              admin
             </Link>
             </div>
             <div>📇 <Link href="/admin/indexar" className="hover:underline">Indexar</Link></div>
@@ -107,16 +107,16 @@ export default function Admin() {
 
         {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
 
-        <div className="grid grid-col lg:grid-cols-2 container mx-auto p-4 my-4 px-4 lg:w-full border-[1px] border-[#777] py-4 rounded-lg">
-          <div className="py-2">
+        <div className="grid grid-col lg:grid-cols-2 container mx-auto lg:my-16 px-4 lg:w-full border-[1px] border-[#777] py-4 rounded-lg">
+          <div className="my-2">
             <h3 className="border-[1px] border-[#777] bg-[#f0f0f0] rounded-md px-4 mr-4">Libros</h3>
             {loadingA ? <p className="p-2">Cargando libros...</p> : (
               books.length ? (
                 <ul className="space-y-2">
                   {books.map((book) => (
-                    <li key={book.id} className="flex justify-between items-center px-4 py-2 bg-gray-100 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mr-4 mt-2">
+                    <li key={book.id} className="flex justify-between items-center px-4 py-2 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mr-4 mt-2">
                       <div>
-                        <Link href={`/o/${book.isbn}`} className="text-xl hover:underline">
+                        <Link href={`/o/${book.isbn}`} className="text-md hover:underline">
                           <span className="font-bold">{book.title}</span> de {book.author}
                         </Link>
                       </div>
@@ -124,7 +124,7 @@ export default function Admin() {
                         onClick={() => handleRemove(book.id)}
                         className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700"
                       >
-                        Remover
+                        X
                       </button>
                     </li>
                   ))}
@@ -132,7 +132,7 @@ export default function Admin() {
               ) : <p>No books available.</p>
             )}
             <Link href="/admin/indexar">
-              <div className="flex justify-between items-center p-4 bg-gray-100 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mr-4 mt-2 hover:bg-green-500">
+              <div className="flex justify-between items-center p-4 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mr-4 mt-2 hover:bg-green-500">
                 + Añadir otro libro
               </div>
             </Link>
@@ -144,7 +144,7 @@ export default function Admin() {
               authors.length ? (
                 <ul className="space-y-2">
                   {authors.map((author) => (
-                    <li key={author.id} className="flex justify-between items-center px-4 py-2 bg-gray-100 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mt-2">
+                    <li key={author.id} className="flex text-md justify-between items-center px-4 py-2  border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mt-2">
                       <div>
                         <span className="font-bold">{author.name}</span>
                       </div>
@@ -152,7 +152,7 @@ export default function Admin() {
                         onClick={() => handleRemoveAuthor(author.id)}
                         className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700"
                       >
-                        Remover
+                        X
                       </button>
                     </li>
                   ))}
@@ -160,7 +160,7 @@ export default function Admin() {
               ) : <p>No authors available.</p>
             )}
             <Link href="/admin/autores">
-              <div className="flex justify-between items-center p-4 bg-gray-100 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mt-2 hover:bg-green-500">
+              <div className="flex justify-between items-center p-4  border-[1px] border-[#777] rounded-md rounded-lg mt-2 hover:bg-green-500">
                 + Añadir otro autor
               </div>
             </Link>
@@ -172,7 +172,7 @@ export default function Admin() {
 
   return (
     <div className="my-72 mx-auto text-center">
-      <button onClick={() => signIn()} className="hover:bg-white hover:text-black rounded-full border-2 border-white px-4 py-2 my-8">Entrar a Panel de Control</button>
+      <button onClick={() => signIn()} className="hover:bg-black hover:text-white rounded-full border-2 border-[#111] px-4 py-2 my-8">administrar</button>
     </div>
   );
 }

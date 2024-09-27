@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/reviews.js", "components/wa.tsx", "components/menu.js", "tailwind.config.ts", "components/modal.js", "pages/api/order.js", "pages/api/auth/[...nextauth].ts", "pages/admin/indexar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/reviews.js", "components/wa.tsx", "components/menu.js", "tailwind.config.ts", "components/modal.js", "pages/api/order.js", "pages/api/auth/[...nextauth].ts", "pages/admin/indexar.jsx", "pages/admin/edit/[id].tsx"],
   "exclude": ["node_modules"]
 }

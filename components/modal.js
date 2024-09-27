@@ -60,7 +60,7 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
       });
 
       if (response.ok) {
-        router.push('/done');
+        router.push('/hecho');
       } else {
         setError('Error al enviar el pedido. Inténtalo de nuevo.');
       }

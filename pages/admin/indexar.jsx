@@ -10,6 +10,7 @@ export default function Catalogar() {
     author: '',
     description: '',
     price: '',
+    gender: '',
     isbn: '',
     year: '',
     pages: '',
@@ -24,7 +25,7 @@ export default function Catalogar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, author, description, price, isbn, year, pages, ratio, editorial, imgurl } = bookData;
+    const { title, author, description, price, gender, isbn, year, pages, ratio, editorial, imgurl } = bookData;
 
     if (!title || !author) {
       alert("Title and Author are required");
@@ -42,12 +43,13 @@ export default function Catalogar() {
           author, 
           description, 
           price, 
+          gender,
           isbn, 
           year, 
           pages, 
           ratio,
           editorial,
-          imgurl: sanitizedImgUrl // Make sure imgurl is properly formatted
+          imgurl: sanitizedImgUrl 
         }
       ]);
 
@@ -60,6 +62,7 @@ export default function Catalogar() {
         author: '',
         description: '',
         price: '',
+        gender: '',
         isbn: '',
         year: '',
         pages: '',
@@ -100,6 +103,7 @@ export default function Catalogar() {
               <input name="author" type="text" placeholder="Autor" value={bookData.author} onChange={handleChange} className="w-full p-2 border rounded-md p-4" required />
               <textarea name="description" placeholder="Descripción" value={bookData.description} onChange={handleChange} className="w-full p-2 border rounded-md p-4"></textarea>
               <input name="price" type="number" placeholder="Precio" value={bookData.price} onChange={handleChange} className="w-full p-2 border rounded-md p-4" />
+              <input name="gender" type="text" placeholder="Género" value={bookData.gender} onChange={handleChange} className="w-full p-2 border rounded-md p-4" />
               <input name="isbn" type="text" placeholder="ISBN" value={bookData.isbn} onChange={handleChange} className="w-full p-2 border rounded-md p-4" />
               <input name="year" type="number" placeholder="Año" value={bookData.year} onChange={handleChange} className="w-full p-2 border rounded-md p-4" />
               <input name="pages" type="number" placeholder="Páginas" value={bookData.pages} onChange={handleChange} className="w-full p-2 border rounded-md p-4" />
