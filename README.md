@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Vicio Perpetuo | Virtual Bookstore
+
+![viciope](./public/viciope-cover.png)
+
+![viciope](./public/viciope.png)
+
+Welcome to **Vicio Perpetuo**, a virtual bookstore focused on promoting Peruvian culture and literature. Here you can discover and purchase books from Peruvian authors, with a special emphasis on our national identity, history, and traditions.
 
 ## Getting Started
 
@@ -14,23 +20,27 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to explore the bookstore.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to Buy
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Browse** our catalog and select your favorite book.
+2. **Click "Comprar"** to open the purchase modal.
+3. **Choose your payment method:**  
+   - **Yape**  
+   - **Plin**  
+   - **Bitcoin**
+4. **Follow the instructions** to complete your payment and provide your contact details.
+5. Once your payment is confirmed, you'll receive your book or further instructions by email.
 
-## Learn More
+## Payment Methods
 
-To learn more about Next.js, take a look at the following resources:
+- **Yape**: Scan the QR code and pay to the provided number.
+- **Plin**: Scan the QR code and pay to the provided number.
+- **Bitcoin**: Scan the QR code and send the exact amount to the provided address. Enter your TXID for verification.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All payment methods are secure and fast, making your shopping experience easy and convenient.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## About
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Vicio Perpetuo is dedicated to supporting Peruvian authors and sharing our culture through literature. We offer a curated selection of books that reflect the diversity and richness of Peru. If you consider to donate, please contact us at [editorialvicioperpetuo@gmail.com](mailto:editorialvicioperpetuo@gmail.com).
