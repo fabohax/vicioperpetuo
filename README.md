@@ -4,7 +4,7 @@
 
 ![viciope](./public/viciope.png)
 
-Welcome to **Vicio Perpetuo**, a virtual bookstore focused on promoting Peruvian culture and literature. Here you can discover and purchase books from Peruvian authors, with a special emphasis on our national identity, history, and traditions.
+Welcome to **Vicio Perpetuo**, a virtual bookstore focused on promoting Peruvian culture and literature. Here you can discover and purchase books from Peruvian and internationalauthors, with a special emphasis on our national identity, history, traditions and imagination.
 
 ## Getting Started
 
