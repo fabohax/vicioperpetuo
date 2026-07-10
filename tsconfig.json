@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -10,7 +14,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -18,9 +22,29 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": [
+        "./*"
+      ]
+    },
+    "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/reviews.js", "components/wa.tsx", "components/menu.js", "tailwind.config.ts", "components/modal.js", "pages/api/order.js", "pages/api/auth/[...nextauth].ts", "pages/admin/indexar.jsx", "pages/admin/edit/[id].tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "components/reviews.js",
+    "components/wa.tsx",
+    "components/menu.js",
+    "tailwind.config.ts",
+    "components/modal.js",
+    "pages/api/order.js",
+    "pages/api/auth/[...nextauth].ts",
+    "pages/admin/indexar.jsx",
+    "pages/admin/edit/[id].tsx",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

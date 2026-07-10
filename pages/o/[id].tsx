@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
@@ -45,13 +45,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   }
 
-  const paths = books.map((book) => ({
-    params: { id: book.isbn },  // Use isbn as the dynamic id
-  }));
+  const paths = (books || [])
+    .filter((book) => typeof book.isbn === "string" && book.isbn.trim().length > 0)
+    .map((book) => ({
+      params: { id: book.isbn.trim() },  // Use isbn as the dynamic id
+    }));
 
   return {
     paths,
-    fallback: false, // Show 404 if no matching path is found
+    fallback: "blocking",
   };
 };
 
@@ -71,21 +73,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { book },
+    revalidate: 60,
   };
 };
 
 export default function Obras({ book }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: session, status } = useSession();
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    // Check if the logged-in user is an admin based on their email
-    if (session && session.user) {
-      const allowedAdmins = ["fabohax@gmail.com", "edicionesvicioperpetuo@gmail.com"];
-      setIsAdmin(allowedAdmins.includes(session.user.email!));
-    }
-  }, [session]);
+  const allowedAdmins = ["fabohax@gmail.com", "edicionesvicioperpetuo@gmail.com"];
+  const isAdmin = Boolean(session?.user?.email && allowedAdmins.includes(session.user.email));
 
   if (!book) {
     return <div>Book not found</div>;

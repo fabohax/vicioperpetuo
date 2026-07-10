@@ -1,9 +1,8 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
+import { auth } from "@/auth";
 
 // Assign the arrow function to a variable before exporting
 const restrictedContent = async (req, res) => {
-  const session = await getServerSession(req, res, authOptions);
+  const session = await auth(req, res);
 
   if (session) {
     res.send({

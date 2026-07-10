@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import Menu from '@/components/menu'; 
 import { createClient } from '@supabase/supabase-js';
 
@@ -25,7 +26,7 @@ export default function Autores({ authors }: { authors: any[] }) {
 
       <div id="autores-container" className="fade-up mt-32">
         <div className="fixed top-3 left-4 z-200">
-          <a href="/" className="hover:underline font-medium">Vicio Perpetuo Vicio Perfecto</a>
+          <Link href="/" className="hover:underline font-medium">Vicio Perpetuo Vicio Perfecto</Link>
         </div>
         <Menu dark="true" />
         <h1 className="mb-32 text-5xl font-bold spectral text-center">Autores</h1>

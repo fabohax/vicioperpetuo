@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import path from 'path';
@@ -29,13 +29,7 @@ interface Props {
 }
 
 const Cuento: React.FC<Props> = ({ books }) => {
-  const [cuentoBooks, setCuentoBooks] = useState<Book[]>([]);
-
-  useEffect(() => {
-    // Filter books by gender "Cuento"
-    const filteredBooks = books.filter(book => book.gender === "Cuento");
-    setCuentoBooks(filteredBooks);
-  }, [books]);
+  const cuentoBooks = books.filter(book => book.gender === "Cuento");
 
   return (
     <div className="container mx-auto py-8">
@@ -58,7 +52,7 @@ const Cuento: React.FC<Props> = ({ books }) => {
             <h2 className="text-xl font-bold mt-4">{book.title}</h2>
             <p className="text-gray-600">{book.author}</p>
             <p className="text-gray-800 font-bold mt-2">{book.price} PEN</p>
-            <Link href={`/o/${book.id}`} className="mt-4 inline-block text-blue-500 hover:underline">
+            <Link href={`/o/${book.isbn}`} className="mt-4 inline-block text-blue-500 hover:underline">
                 Ver más
             </Link>
           </div>
