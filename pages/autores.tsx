@@ -1,23 +1,17 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Menu from '@/components/menu'; 
 import { supabase } from "@/utils/supabaseClient";
+import { Seo } from "@/lib/seo";
 
 export default function Autores({ authors }: { authors: any[] }) {
   return (
     <>
-      <Head>
-        <title>Autores | Vicio Perpetuo Vicio Perfecto</title>
-        <meta property="og:title" content="Vicio Perpetuo Vicio Perfecto | Editorial" />
-        <meta property="og:url" content="https://vicioperpetuo.com" />
-        <meta property="og:image" content="/vicio.png" />
-        <meta property="og:description" content="La editorial de libros más vendida en el Perú. Fundada en 2011, nuestra editorial promueve autores peruanos y nuestra identidad nacional." />
-        <meta property="twitter:title" content="Vicio Perpetuo Vicio Perfecto | Editorial" />
-        <meta property="twitter:url" content="https://vicioperpetuo.com" />
-        <meta property="twitter:image" content="/vicio.png" />
-        <meta property="twitter:description" content="La editorial de libros más vendida en el Perú. Fundada en 2011, nuestra editorial promueve autores peruanos y nuestra identidad nacional." />
-      </Head>
+      <Seo
+        title="Autores peruanos | Vicio Perpetuo Vicio Perfecto"
+        description="Conoce a los autores publicados por Vicio Perpetuo Vicio Perfecto, editorial peruana dedicada a promover nuevas voces literarias."
+        path="/autores"
+      />
 
       <div id="autores-container" className="fade-up mt-32">
         <div className="fixed top-3 left-4 z-200">

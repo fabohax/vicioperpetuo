@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Menu from '@/components/menu';
 import PModal from '@/components/postularModal'
+import { Seo } from '@/lib/seo';
 
 export default function Nosotros() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,6 +11,11 @@ export default function Nosotros() {
   const closeModal = () => setIsModalOpen(false);
   return (
     <>
+      <Seo
+        title="Nosotros | Vicio Perpetuo Vicio Perfecto"
+        description="Conoce la historia de Vicio Perpetuo Vicio Perfecto, editorial peruana fundada en 2011 y dirigida por Julio Benavides Parra."
+        path="/nosotros"
+      />
       <div>
         <div className="fixed top-3 left-4 z-200">
             <Link href="/" className="hover:underline font-medium">Vicio Perpetuo Vicio Perfecto</Link>

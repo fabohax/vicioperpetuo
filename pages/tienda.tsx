@@ -4,6 +4,7 @@ import Menu from "@/components/menu";
 import BookCovers from "@/components/BookCovers";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { supabase } from "@/utils/supabaseClient";
+import { Seo } from "@/lib/seo";
 
 interface Book {
   title: string;
@@ -38,6 +39,11 @@ const Tienda = () => {
 
   return (
     <div>
+      <Seo
+        title="Tienda de libros | Vicio Perpetuo Vicio Perfecto"
+        description="Compra libros de poesia, narrativa y cuento publicados por la editorial peruana Vicio Perpetuo Vicio Perfecto."
+        path="/tienda"
+      />
       {/* Header */}
       <header className="fixed top-3 left-4 z-200">
         <Link href="/" className="hover:underline font-medium">

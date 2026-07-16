@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/menu";
+import { Seo } from "@/lib/seo";
 
 const Done = () => {
   return (
     <div>
+      <Seo title="Postulacion recibida" description="Confirmacion de postulacion recibida." path="/recibido" noindex />
       {/* Header */}
       <header className="fixed top-3 left-4 z-200">
         <Link href="/" className="hover:underline font-medium">

@@ -4,32 +4,63 @@ import "./app.css";
 
 import Wa from "@/components/wa";
 import Footer from "@/components/footer";
+import { DEFAULT_DESCRIPTION, DEFAULT_IMAGE, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Vicio Perpetuo Vicio Perfecto | Editorial",
-  description: "Editorial peruana resaltando cultura generacional",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "editorial peruana",
+    "libros peruanos",
+    "poesia peruana",
+    "narrativa peruana",
+    "cuento peruano",
+    "publicar libro en Peru",
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Vicio Perpetuo Vicio Perfecto | Editorial",
-    description: "La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú.",
-    url: "https://vicioperpetuo.com",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "es_PE",
     type: "website",
     images: [
       {
-        url: "https://vicioperpetuo.com/public/vicio.png",
+        url: DEFAULT_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Vicio Perpetuo Logo",
+        alt: SITE_NAME,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vicio Perpetuo Vicio Perfecto | Editorial",
-    description: "La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú.",
-    images: ["https://vicioperpetuo.com/public/vicio.png"], 
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_IMAGE],
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

@@ -88,7 +88,7 @@ const Page = () => {
 
       {/* Quote Section */}
       <section className="text-center mx-auto px-8 py-24">
-        <blockquote className="text-lg italic leading-relaxed">
+        <blockquote className="spectral text-3xl italic leading-relaxed">
           <p>No es este tu país</p>
           <p>porque conozcas sus linderos,</p>
           <p>ni por el idioma común,</p>

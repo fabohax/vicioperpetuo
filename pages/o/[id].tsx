@@ -1,15 +1,15 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { GetStaticProps, GetStaticPaths } from "next";
-import Head from "next/head";
 import { supabase } from "@/utils/supabaseClient"; // Import Supabase client
 import Menu from "@/components/menu";
 import BookDetails from "@/components/book";
 import Modal from "@/components/modal"; // Modal component
 import LoadingImage from "@/components/LoadingImage";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { Seo, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { ParsedUrlQuery } from "querystring"; // Import this to define the params type
 
 interface Params extends ParsedUrlQuery {
@@ -107,6 +107,37 @@ export default function Obras({ book }: Props) {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const adminBook = editableBook?.id === book.id ? editableBook : book;
+  const pageTitle = `${book.title} de ${book.author} | ${SITE_NAME}`;
+  const pageDescription =
+    book.description?.trim() ||
+    `Compra ${book.title}, libro de ${book.author}, publicado por ${SITE_NAME}.`;
+  const bookUrl = `${SITE_URL}/o/${encodeURIComponent(book.isbn)}`;
+  const bookJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    name: book.title,
+    author: {
+      "@type": "Person",
+      name: book.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: book.editorial || SITE_NAME,
+    },
+    isbn: book.isbn,
+    datePublished: book.year ? String(book.year) : undefined,
+    numberOfPages: book.pages || undefined,
+    image: book.imgurl,
+    description: pageDescription,
+    url: bookUrl,
+    offers: {
+      "@type": "Offer",
+      price: book.price,
+      priceCurrency: "PEN",
+      availability: "https://schema.org/InStock",
+      url: bookUrl,
+    },
+  };
 
   const handleAdminBookChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -163,12 +194,14 @@ export default function Obras({ book }: Props) {
 
   return (
     <>
-      <Head>
-        <title>{`${book.title} de ${book.author} | Vicio Perpetuo Vicio Perfecto`}</title>
-        <meta property="og:title" content={`${book.title} de ${book.author}`} />
-        <meta property="og:description" content={book.description} />
-        <meta name="twitter:description" content={book.description} />
-      </Head>
+      <Seo
+        title={pageTitle}
+        description={pageDescription}
+        path={`/o/${book.isbn}`}
+        image={book.imgurl}
+        type="book"
+        jsonLd={bookJsonLd}
+      />
 
       <div className="fixed top-2 left-4">
         <Link href="/" className="hover:underline font-medium">
@@ -278,12 +311,6 @@ export default function Obras({ book }: Props) {
                 {isSavingBook ? "Guardando..." : "Guardar Cambios"}
               </button>
             </form>
-            <button
-            onClick={() => signOut({ callbackUrl: '/' })}
-            className="fixed top-[11px] right-12 hover:bg-black hover:text-white border-[1px] border-black rounded-full px-2 py-[3px] text-[11px] backdrop-blur bg-white/30"
-          >
-            CERRAR SESIÓN
-          </button>
           </>
         ) : (
           <>

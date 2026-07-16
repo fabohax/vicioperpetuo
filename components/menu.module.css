@@ -106,6 +106,12 @@
     width: 12px;
     border-radius: 9999px 9999px 3px 3px;
   }
+
+  .logoutIcon {
+    height: 16px;
+    width: 16px;
+    stroke-width: 2;
+  }
   
   .menuContainer {
     text-align: right;

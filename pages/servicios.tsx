@@ -1,10 +1,10 @@
 // pages/servicios.tsx
 import { useState } from 'react';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Menu from '@/components/menu';
 import PModal from '@/components/postularModal';
+import { Seo } from '@/lib/seo';
 
 export default function Servicios() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,17 +12,11 @@ export default function Servicios() {
   const closeModal = () => setIsModalOpen(false);
   return (
     <>
-      <Head>
-        <title>Servicios | Vicio Perpetuo Vicio Perfecto</title>
-        <meta property="og:title" content="Vicio Perpetuo Vicio Perfecto | Editorial" />
-        <meta property="og:url" content="https://vicioperpetuo.com" />
-        <meta property="og:image" content="https://vicioperpetuo.com/public/vicio.png" />
-        <meta property="og:description" content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." />
-        <meta property="twitter:title" content="Vicio Perpetuo Vicio Perfecto | Editorial" />
-        <meta property="twitter:url" content="https://vicioperpetuo.com" />
-        <meta property="twitter:image" content="https://vicioperpetuo.com/public/vicio.png" />
-        <meta property="twitter:description" content="La editorial de libros más vendida en el Perú. Fundada el 15 de enero del 2011, nuestra editorial tiene como objetivo promover a autores peruanos y transmitir nuestra identidad nacional a través de la literatura. Nos enfocamos en temas como costumbres, historia, danzas, cultura culinaria, climas, idiomas, fauna y flora, y todo lo que representa ser peruano y el concepto de Perú." />
-      </Head>
+      <Seo
+        title="Servicios editoriales | Vicio Perpetuo Vicio Perfecto"
+        description="Servicios de correccion, estilo, diagramacion, talleres literarios, edicion, impresion, diseno de portada y venta de libros."
+        path="/servicios"
+      />
 
       <div id="info" className="fade-up">
         <div className="fixed top-3 left-4 z-200">

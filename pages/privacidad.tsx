@@ -4,10 +4,16 @@ import Menu from "@/components/menu";
 import Reviews from "@/components/reviews";
 import Wa from "@/components/wa";
 import Footer from '@/components/footer';
+import { Seo } from "@/lib/seo";
 
 const PoliticaPrivacidad = () => {
   return (
     <div>
+      <Seo
+        title="Politica de privacidad | Vicio Perpetuo Vicio Perfecto"
+        description="Politica de privacidad de Vicio Perpetuo Vicio Perfecto para usuarios, compradores y postulantes."
+        path="/privacidad"
+      />
       {/* Header */}
       <header className="fixed top-3 left-4 z-200">
         <Link href="/" className="hover:underline font-medium">

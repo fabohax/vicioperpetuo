@@ -1,13 +1,16 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { LogOut } from 'lucide-react';
+import { signOut } from 'next-auth/react';
 import styles from './menu.module.css';
 import PModal from './postularModal';
 
 const Menu = ({ dark }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPostularOpen, setIsPostularOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   // Convert dark prop to a boolean
   const isDarkMode = dark === "true";
@@ -24,23 +27,58 @@ const Menu = ({ dark }) => {
     closeMenu();
   }
 
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch('/api/auth/session')
+      .then((response) => response.ok ? response.json() : null)
+      .then((session) => {
+        if (isMounted) {
+          setIsLoggedIn(Boolean(session?.user));
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setIsLoggedIn(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div className={isDarkMode ? styles.inverted : ''}>
       <div className={styles.topActions}>
-        <button
-          type="button"
-          className={`${styles.publishButton} ${isDarkMode ? styles.publishButtonDark : ''}`}
-          onClick={() => setIsPostularOpen(true)}
-        >
-          Publicar
-        </button>
-        <Link
-          href="/admin"
-          className={`${styles.profileButton} ${isDarkMode ? styles.profileButtonDark : ''}`}
-          aria-label="Ir a iniciar sesión de administrador"
-        >
-          <span className={styles.profileIcon} aria-hidden="true" />
-        </Link>
+        {isLoggedIn === null ? null : isLoggedIn ? (
+          <button
+            type="button"
+            className={`${styles.profileButton} ${isDarkMode ? styles.profileButtonDark : ''}`}
+            onClick={() => signOut({ callbackUrl: '/' })}
+            aria-label="Cerrar sesión"
+            title="Cerrar sesión"
+          >
+            <LogOut className={styles.logoutIcon} aria-hidden="true" />
+          </button>
+        ) : (
+          <>
+            <button
+              type="button"
+              className={`${styles.publishButton} ${isDarkMode ? styles.publishButtonDark : ''}`}
+              onClick={() => setIsPostularOpen(true)}
+            >
+              Publicar
+            </button>
+            <Link
+              href="/admin"
+              className={`${styles.profileButton} ${isDarkMode ? styles.profileButtonDark : ''}`}
+              aria-label="Ir a iniciar sesión de administrador"
+            >
+              <span className={styles.profileIcon} aria-hidden="true" />
+            </Link>
+          </>
+        )}
       </div>
       <div className='z-100'>
         {isMenuOpen ? (

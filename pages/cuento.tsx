@@ -5,6 +5,7 @@ import path from 'path';
 import fs from 'fs';
 import { GetStaticProps } from 'next';
 import Menu from "@/components/menu";
+import { Seo } from "@/lib/seo";
 
 type Book = {
   id: string;
@@ -33,6 +34,11 @@ const Cuento: React.FC<Props> = ({ books }) => {
 
   return (
     <div className="container mx-auto py-8">
+      <Seo
+        title="Libros de cuento | Vicio Perpetuo Vicio Perfecto"
+        description="Catalogo de cuentos y antologias narrativas publicadas por Vicio Perpetuo Vicio Perfecto."
+        path="/cuento"
+      />
         <div className="fixed top-2 left-4">
             <Link href="/" className="hover:underline font-medium">Vicio Perpetuo Vicio Perfecto</Link>
         </div>
