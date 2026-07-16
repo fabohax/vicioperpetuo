@@ -1,6 +1,6 @@
 // page.tsx
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/menu";
@@ -10,13 +10,46 @@ import PModal from '@/components/postularModal'
 const Page = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const updateParallax = () => {
+      frame = 0;
+      setParallaxOffset(reducedMotion.matches ? 0 : Math.min(window.scrollY * 0.22, 140));
+    };
+
+    const handleScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    reducedMotion.addEventListener("change", updateParallax);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      reducedMotion.removeEventListener("change", updateParallax);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
     <div>
       {/* Header */}
-      <header className="fixed top-3 left-4 z-200">
-        <Link href="/" className="hover:underline font-medium">
+      <header
+        className="fixed top-3 left-4 right-16 overflow-visible"
+        style={{ zIndex: 2147483647 }}
+      >
+        <Link
+          href="/"
+          className="inline-block max-w-full whitespace-nowrap bg-[#111]/85 pr-2 font-medium leading-6 hover:underline"
+        >
           Vicio Perpetuo Vicio Perfecto
         </Link>
       </header>
@@ -25,13 +58,28 @@ const Page = () => {
       <Menu dark="false" />
 
       {/* Logo Section */}
-      <div className="flex flex-col justify-center items-center h-screen">
+      <div className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden">
+        <div
+          className="absolute -inset-x-8 -inset-y-20 -z-10 will-change-transform"
+          style={{ transform: `translate3d(0, ${parallaxOffset}px, 0)` }}
+        >
+          <Image
+            src="/viciope-bg.png"
+            fill
+            priority
+            alt=""
+            aria-hidden="true"
+            className="object-cover object-center opacity-90"
+            sizes="100vw"
+          />
+        </div>
         <Image
           src="/logo.svg"
           height={210}
           width={210}
           alt="Vicio Perpetuo Vicio Perfecto Logo"
-          className="my-36"
+          className="my-36 drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+          style={{ width: "210px", height: "auto" }}
         />
       </div>
 

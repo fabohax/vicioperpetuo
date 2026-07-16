@@ -2,12 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Menu from '@/components/menu'; 
-import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from "@/utils/supabaseClient";
 
 export default function Autores({ authors }: { authors: any[] }) {
   return (
@@ -39,6 +34,7 @@ export default function Autores({ authors }: { authors: any[] }) {
                 width={150}
                 height={150}
                 className="rounded-3xl hover:scale-110 transition-transform duration-200"
+                style={{ width: "150px", height: "auto" }}
               />
               <span className="font-serif text-xl mt-4">{author.name}</span>
             </div>

@@ -53,3 +53,41 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #444 #1a1a1a;
 }
+
+.delivery-map {
+  height: 240px;
+}
+
+.delivery-map .leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: #111;
+}
+
+.delivery-map .leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.85);
+  color: #111;
+  font-size: 10px;
+}
+
+.delivery-map-pin {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 999px 999px 999px 0;
+  background: #ef4444;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  transform: rotate(-45deg);
+}
+
+.delivery-map-pin::after {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #fff;
+  content: "";
+}

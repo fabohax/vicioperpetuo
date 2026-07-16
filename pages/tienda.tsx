@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/menu";
 import BookCovers from "@/components/BookCovers";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { supabase } from "@/utils/supabaseClient";
 
 interface Book {
@@ -34,7 +34,7 @@ const Tienda = () => {
     fetchBooks();
   }, []);
 
-  if (loading) return <p className="h-screen text-center mx-auto py-2">Cargando...</p>;
+  if (loading) return <LoadingSpinner className="h-screen" label="Cargando tienda" />;
 
   return (
     <div>

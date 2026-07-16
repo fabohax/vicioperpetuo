@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
  
 export async function proxy(req: NextRequest) {
   
-  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  const session = await getToken({ req, secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET });
  
   if (!session) {
     console.log('session started')

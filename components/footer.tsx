@@ -7,7 +7,7 @@ const Footer = () => {
       <footer className="footer-container px-4 py-16 border-t-[1px] border-[#333] lg:text:md text-lg">
 
           <div>
-            <Image src="/logo.svg" height={91} width={91} alt="vpvp-logo" className='block'></Image>
+            <Image src="/logo.svg" height={91} width={91} alt="vpvp-logo" className='block' style={{ width: "91px", height: "auto" }}></Image>
           </div>
           <div className='my-4 lg:text-3xl text-3xl'>
             <Link href="/">
@@ -58,19 +58,12 @@ const Footer = () => {
           <Link href="https://www.instagram.com/edicionesvicioperpetuo/" className="hover:underline my-4">
           Instagram
           </Link>
+        </div>    
+
+        <div>
+          <Link href="https://fabohax.vercel.app" target="_blank">★</Link>
         </div>
-             
-
-        
-          
-        
-      </footer>
-
-      <div className="relative h-8 bg-black text-left flex items-center px-4 py-8 text-2xl lg:text-lg">
-        <p>
-            <Link href="https://hax.pe" target="_blank" className="hover:underline hover:text-white text-[#f1f1f1]">hax.pe</Link>
-        </p>
-    </div>
+        </footer>
     </>
   );
 };

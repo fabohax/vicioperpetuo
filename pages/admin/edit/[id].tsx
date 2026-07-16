@@ -1,8 +1,11 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/router";
+import { signInAsAdmin } from "@/utils/adminAuth";
+import { LogOut } from "lucide-react";
+import PinataImageUpload from "@/components/PinataImageUpload";
 
 type BookData = {
   title: string;
@@ -21,7 +24,7 @@ type BookData = {
 export default function EditBook() {
   const { data: session } = useSession();
   const router = useRouter();
-  const { isbn } = router.query;
+  const { id } = router.query;
 
   const [bookData, setBookData] = useState<BookData>({
     title: '',
@@ -38,13 +41,13 @@ export default function EditBook() {
   });
 
   useEffect(() => {
-    if (isbn) {
+    if (id) {
       const fetchBookData = async () => {
-        const { data, error } = await supabase
-          .from('vpvp_books')
-          .select('*')
-          .eq('isbn', isbn)
-          .single();
+        const routeId = Array.isArray(id) ? id[0] : id;
+        const query = supabase.from('vpvp_books').select('*');
+        const { data, error } = /^\d+$/.test(routeId)
+          ? await query.eq('id', routeId).single()
+          : await query.eq('isbn', routeId).single();
           
         if (error) {
           console.error("Error fetching book data:", error.message);
@@ -55,11 +58,15 @@ export default function EditBook() {
   
       fetchBookData();
     }
-  }, [isbn]);
+  }, [id]);
   
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setBookData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleImageChange = (imgurl: string) => {
+    setBookData((prevData) => ({ ...prevData, imgurl }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -68,6 +75,12 @@ export default function EditBook() {
 
     if (!title || !author) {
       alert("Title and Author are required");
+      return;
+    }
+
+    const bookId = (bookData as BookData & { id?: number | string }).id;
+    if (!bookId) {
+      alert("No se pudo identificar el libro para actualizar.");
       return;
     }
 
@@ -85,55 +98,55 @@ export default function EditBook() {
         editorial,
         imgurl: imgurl.trim(),
       })
-      .eq('isbn', isbn);
+      .eq('id', bookId)
+      .select('id, isbn')
+      .single();
 
       if (error) {
-        console.error("Error fetching book data from Supabase:", error.message);
+        console.error("Error updating book data in Supabase:", error.message);
+        alert("Error al guardar: " + error.message);
       }
        else {
-      alert("Book updated successfully!");
+      alert("Libro actualizado correctamente.");
+      router.push("/admin");
     }
   };
 
   if (session) {
     return (
-      <>
-        <div>
-          <div className="flex flex-row fixed top-8 left-8 gap-2 space-x-8">
+      <div className="min-h-screen bg-black px-4 py-6 text-[#e6edf3] sm:px-6 lg:px-8 lg:py-16">
+        <div className="mx-auto max-w-3xl">
+          <div className="fixed left-4 top-8 z-10 flex flex-row flex-wrap gap-3 rounded-md border border-[#30363d] bg-[#0d1117]/90 px-3 py-2 text-sm text-white shadow-sm backdrop-blur sm:left-8 sm:gap-5">
             <div>👤 <Link href="/admin" className="hover:underline">
               {session?.user?.email?.split('@')[0] || 'NN'}
             </Link></div>
             <div>📇 <Link href="/admin/indexar" className="hover:underline">Indexar</Link></div>
             <div>🪶 <Link href="/admin/autores" className="hover:underline">Autores</Link></div>
+            <div>🧾 <Link href="/admin/pedidos" className="hover:underline">Pedidos</Link></div>
           </div>
-          <button onClick={() => signOut()} className="fixed top-0 right-8 hover:bg-black hover:text-white my-8 border-[1px] border-black rounded-full px-4 py-2 text-sm">
-            CERRAR SESIÓN
+          <button
+            onClick={() => signOut()}
+            className="fixed right-4 top-0 z-10 my-8 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#30363d] bg-[#0d1117]/90 text-white backdrop-blur hover:border-[#8b949e] hover:bg-[#161b22] sm:right-8"
+            aria-label="Cerrar sesión"
+            title="Cerrar sesión"
+          >
+            <LogOut className="h-5 w-5" aria-hidden="true" />
           </button>
 
-          <div className="lg:w-1/3 mx-auto px-8 my-28">
-            <h1 className="spectral text-2xl">Editar Libro</h1>
+          <div className="my-28 overflow-hidden rounded-md border border-[#30363d] bg-[#0d1117]">
+            <div className="border-b border-[#30363d] bg-[#161b22] px-4 py-3">
+              <h1 className="spectral text-2xl font-bold text-white">Editar Libro</h1>
+            </div>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-              <input
-                name="imgurl"
-                type="text"
-                placeholder={bookData.imgurl || "URL de Imagen de Portada"}
-                value={bookData.imgurl}
-                onChange={handleChange}
-                className="w-full px-2 py-72 bg-[#f5f5f5] text-center border rounded-md p-4"
-                style={{
-                  backgroundImage: `url(${bookData.imgurl || '/default-cover.jpg'})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              />
+            <form onSubmit={handleSubmit} className="grid gap-4 p-4 sm:grid-cols-2">
+              <PinataImageUpload value={bookData.imgurl} onChange={handleImageChange} />
               <input
                 name="title"
                 type="text"
                 placeholder={bookData.title || "Título"}
                 value={bookData.title}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff] sm:col-span-2"
                 required
               />
               <input
@@ -142,7 +155,7 @@ export default function EditBook() {
                 placeholder={bookData.author || "Autor"}
                 value={bookData.author}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff] sm:col-span-2"
                 required
               />
               <textarea
@@ -150,7 +163,7 @@ export default function EditBook() {
                 placeholder={bookData.description || "Descripción"}
                 value={bookData.description}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="min-h-36 w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff] sm:col-span-2"
               />
               <input
                 name="price"
@@ -158,7 +171,7 @@ export default function EditBook() {
                 placeholder={bookData.price || "Precio"}
                 value={bookData.price}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
               />
               <input
                 name="gender"
@@ -166,7 +179,7 @@ export default function EditBook() {
                 placeholder={bookData.gender || "Género"}
                 value={bookData.gender}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
               />
               <input
                 name="year"
@@ -174,7 +187,7 @@ export default function EditBook() {
                 placeholder={bookData.year || "Año"}
                 value={bookData.year}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
               />
               <input
                 name="pages"
@@ -182,7 +195,7 @@ export default function EditBook() {
                 placeholder={bookData.pages || "Páginas"}
                 value={bookData.pages}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
               />
               <input
                 name="ratio"
@@ -190,7 +203,7 @@ export default function EditBook() {
                 placeholder={bookData.ratio || "Dimensiones"}
                 value={bookData.ratio}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
               />
               <input
                 name="editorial"
@@ -198,22 +211,26 @@ export default function EditBook() {
                 placeholder={bookData.editorial || "Editorial"}
                 value={bookData.editorial}
                 onChange={handleChange}
-                className="w-full p-2 border rounded-md p-4"
+                className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
               />
-              <button type="submit" className="hover:bg-black text-white bg-gray-900 px-4 py-2 rounded w-full py-4">
+              <button type="submit" className="w-full rounded-md bg-[#238636] px-4 py-3 font-semibold text-white hover:bg-[#2ea043] sm:col-span-2">
                 Actualizar Libro
               </button>
-              <p><Link href={`/o/${bookData.isbn})`}>vicioperpetuo.com/o/{bookData.isbn}</Link></p>
+              <p className="text-sm text-[#8b949e] sm:col-span-2">
+                <Link href={`/o/${bookData.isbn}`} className="text-[#58a6ff] hover:underline">
+                  vicioperpetuo.com/o/{bookData.isbn}
+                </Link>
+              </p>
             </form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
     <div className="my-72 mx-auto text-center">
-      <button onClick={() => signIn()} className="hover:bg-white hover:text-black rounded-full border-2 border-white px-4 py-2 my-8">
+      <button onClick={() => signInAsAdmin(router.asPath)} className="hover:bg-white hover:text-black rounded-full border-2 border-white px-4 py-2 my-8">
         Iniciar Sesión
       </button>
     </div>

@@ -1,13 +1,10 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from "@/utils/supabaseClient";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-// Supabase configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { signInAsAdmin } from "@/utils/adminAuth";
+import { LogOut } from "lucide-react";
 
 interface Book {
   id: number;
@@ -22,6 +19,27 @@ interface Author {
   imgurl: string;
 }
 
+function TrashIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    >
+      <path d="M3 6h18" />
+      <path d="M8 6V4h8v2" />
+      <path d="M19 6l-1 14H6L5 6" />
+      <path d="M10 11v5" />
+      <path d="M14 11v5" />
+    </svg>
+  );
+}
+
 export default function Admin() {
   const { data: session } = useSession();
   const [books, setBooks] = useState<Book[]>([]);
@@ -29,6 +47,8 @@ export default function Admin() {
   const [loadingA, setLoadingA] = useState(true);
   const [loadingB, setLoadingB] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [bookPendingDelete, setBookPendingDelete] = useState<Book | null>(null);
+  const [isDeletingBook, setIsDeletingBook] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -61,12 +81,16 @@ export default function Admin() {
   }, []);
 
   const handleRemove = async (id: number) => {
+    setIsDeletingBook(true);
     try {
       const { error } = await supabase.from('vpvp_books').delete().eq('id', id);
       if (error) throw error;
       setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
+      setBookPendingDelete(null);
     } catch (error) {
       console.error('Error removing book:', (error as any).message);
+    } finally {
+      setIsDeletingBook(false);
     }
   };
 
@@ -82,97 +106,175 @@ export default function Admin() {
 
   if (session) {
     return (  
-      <div className="lg:py-16">
+      <div className="min-h-screen bg-black px-4 py-6 text-[#e6edf3] sm:px-6 lg:px-8 lg:py-16">
+        <div className="mx-auto max-w-6xl">
         
-          <div className="flex flex-row fixed top-8 left-8 gap-2 space-x-8 backdrop-blur bg-white/30">
+          <div className="fixed left-4 top-8 z-10 flex flex-row flex-wrap gap-3 rounded-md border border-[#30363d] bg-[#0d1117]/90 px-3 py-2 text-sm text-white shadow-sm backdrop-blur sm:left-8 sm:gap-5">
             <div>👤 <Link href="/admin" className="hover:underline">
-              admin
+              {session?.user?.email?.split("@")[0] || "NN"}
             </Link>
             </div>
             <div>📇 <Link href="/admin/indexar" className="hover:underline">Indexar</Link></div>
+            <div>🪶 <Link href="/admin/autores" className="hover:underline">Autores</Link></div>
             <div>🧾 <Link href="/admin/pedidos" className="hover:underline">Pedidos</Link></div>
           </div>
           <button
             onClick={() => signOut({ callbackUrl: '/' })}
-            className="fixed top-0 right-8 hover:bg-black hover:text-white my-8 border-[1px] border-black rounded-full px-4 py-2 text-sm backdrop-blur bg-white/30"
+            className="fixed right-4 top-0 z-10 my-8 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#30363d] bg-[#0d1117]/90 text-white backdrop-blur hover:border-[#8b949e] hover:bg-[#161b22] sm:right-8"
+            aria-label="Cerrar sesión"
+            title="Cerrar sesión"
           >
-            CERRAR SESIÓN
+            <LogOut className="h-5 w-5" aria-hidden="true" />
           </button>
         
 
 
         {/* Book List */}
-        <h1 className="spectral text-2xl font-bold text-left mt-20 mx-8">Vicio Perpetuo Vicio Perfecto Index</h1>
-        <p className="mx-8">Aquí puedes revisar la lista completa de Libros y Autores de la Editorial.</p>
+        <h1 className="spectral mt-20 text-left text-2xl font-bold text-white">Vicio Perpetuo Vicio Perfecto Index</h1>
+        <p className="text-[#8b949e]">Aquí puedes revisar la lista completa de Libros y Autores de la Editorial.</p>
 
         {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
 
-        <div className="grid grid-col lg:grid-cols-2 container mx-auto lg:my-16 px-4 lg:w-full border-[1px] border-[#777] py-4 rounded-lg">
-          <div className="my-2">
-            <h3 className="border-[1px] border-[#777] bg-[#f0f0f0] rounded-md px-4 mr-4">Libros</h3>
-            {loadingA ? <p className="p-2">Cargando libros...</p> : (
+        <div className="mb-16 mt-6 grid w-full grid-cols-1 gap-6 lg:mb-24 lg:mt-16 lg:grid-cols-2">
+          <section className="overflow-hidden rounded-md border border-[#30363d] bg-[#0d1117]">
+            <div className="flex items-center justify-between border-b border-[#30363d] bg-[#161b22] px-4 py-3">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Libros</h2>
+              <span className="text-xs text-[#8b949e]">{books.length} registros</span>
+            </div>
+            {loadingA ? <p className="p-4 text-[#8b949e]">Cargando libros...</p> : (
               books.length ? (
-                <ul className="space-y-2">
-                  {books.map((book) => (
-                    <li key={book.id} className="flex justify-between items-center px-4 py-2 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mr-4 mt-2">
-                      <div>
-                        <Link href={`/o/${book.isbn}`} className="text-md hover:underline">
-                          <span className="font-bold">{book.title}</span> de {book.author}
-                        </Link>
-                      </div>
-                      <button
-                        onClick={() => handleRemove(book.id)}
-                        className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700"
-                      >
-                        X
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : <p>No books available.</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full table-fixed border-collapse text-sm">
+                    <thead className="bg-[#161b22] text-left text-white">
+                      <tr>
+                        <th scope="col" className="w-[58%] border-b border-[#30363d] px-4 py-2 font-semibold">Título</th>
+                        <th scope="col" className="w-[30%] border-b border-[#30363d] px-4 py-2 font-semibold">Autor</th>
+                        <th scope="col" className="w-16 border-b border-[#30363d] px-3 py-2 text-center font-semibold">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {books.map((book) => (
+                        <tr key={book.id} className="border-t border-[#30363d] hover:bg-[#161b22]">
+                          <td className="px-4 py-3 align-top">
+                            <Link href={`/o/${book.isbn}`} className="block truncate font-semibold text-[#58a6ff] hover:underline">
+                              {book.title}
+                            </Link>
+                          </td>
+                          <td className="truncate px-4 py-3 align-top text-[#c9d1d9]">{book.author}</td>
+                          <td className="px-3 py-2 text-center align-top">
+                            <button
+                              type="button"
+                              onClick={() => setBookPendingDelete(book)}
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-[#30363d] text-[#f85149] hover:border-[#f85149] hover:bg-[#da3633]/15"
+                              aria-label={`Eliminar ${book.title}`}
+                              title="Eliminar"
+                            >
+                              <TrashIcon />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : <p className="p-4 text-[#8b949e]">No hay libros disponibles.</p>
             )}
-            <Link href="/admin/indexar">
-              <div className="flex justify-between items-center p-4 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mr-4 mt-2 hover:bg-green-500">
+            <Link href="/admin/indexar" className="block border-t border-[#30363d] bg-[#0d1117] px-4 py-3 text-sm font-medium text-[#3fb950] hover:bg-[#161b22]">
                 + Añadir otro libro
-              </div>
             </Link>
-          </div>
+          </section>
 
-          <div className="py-2">
-            <h3 className="border-[1px] border-[#777] bg-[#f0f0f0] rounded-md px-4">Autores</h3>
-            {loadingB ? <p className="p-2">Cargando autores...</p> : (
+          <section className="overflow-hidden rounded-md border border-[#30363d] bg-[#0d1117]">
+            <div className="flex items-center justify-between border-b border-[#30363d] bg-[#161b22] px-4 py-3">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Autores</h2>
+              <span className="text-xs text-[#8b949e]">{authors.length} registros</span>
+            </div>
+            {loadingB ? <p className="p-4 text-[#8b949e]">Cargando autores...</p> : (
               authors.length ? (
-                <ul className="space-y-2">
-                  {authors.map((author) => (
-                    <li key={author.id} className="flex text-md justify-between items-center px-4 py-2  border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mt-2">
-                      <div>
-                        <span className="font-bold">{author.name}</span>
-                      </div>
-                      <button
-                        onClick={() => handleRemoveAuthor(author.id)}
-                        className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700"
-                      >
-                        X
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : <p>No authors available.</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full table-fixed border-collapse text-sm">
+                    <thead className="bg-[#161b22] text-left text-white">
+                      <tr>
+                        <th scope="col" className="border-b border-[#30363d] px-4 py-2 font-semibold">Nombre</th>
+                        <th scope="col" className="w-16 border-b border-[#30363d] px-3 py-2 text-center font-semibold">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {authors.map((author) => (
+                        <tr key={author.id} className="border-t border-[#30363d] hover:bg-[#161b22]">
+                          <td className="truncate px-4 py-3 font-semibold text-[#c9d1d9]">{author.name}</td>
+                          <td className="px-3 py-2 text-center">
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveAuthor(author.id)}
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-[#30363d] text-[#f85149] hover:border-[#f85149] hover:bg-[#da3633]/15"
+                              aria-label={`Eliminar ${author.name}`}
+                              title="Eliminar"
+                            >
+                              <TrashIcon />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : <p className="p-4 text-[#8b949e]">No hay autores disponibles.</p>
             )}
-            <Link href="/admin/autores">
-              <div className="flex justify-between items-center p-4  border-[1px] border-[#777] rounded-md rounded-lg mt-2 hover:bg-green-500">
+            <Link href="/admin/autores" className="block border-t border-[#30363d] bg-[#0d1117] px-4 py-3 text-sm font-medium text-[#3fb950] hover:bg-[#161b22]">
                 + Añadir otro autor
-              </div>
             </Link>
-          </div>
+          </section>
         </div>
+        </div>
+
+        {bookPendingDelete && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="delete-book-title"
+          >
+            <div className="w-full max-w-md rounded-md border border-[#30363d] bg-[#0d1117] p-6 text-[#e6edf3] shadow-xl">
+              <h2 id="delete-book-title" className="spectral text-2xl font-bold text-white">
+                Eliminar libro
+              </h2>
+              <p className="mt-3">
+                ¿Seguro que quieres eliminar{" "}
+                <span className="font-bold">{bookPendingDelete.title}</span> de{" "}
+                {bookPendingDelete.author}?
+              </p>
+              <p className="mt-2 text-sm text-[#8b949e]">
+                Esta acción no se puede deshacer.
+              </p>
+              <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                <button
+                  type="button"
+                  onClick={() => setBookPendingDelete(null)}
+                  disabled={isDeletingBook}
+                  className="rounded-md border border-[#30363d] px-4 py-2 text-white hover:bg-[#161b22] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleRemove(bookPendingDelete.id)}
+                  disabled={isDeletingBook}
+                  className="rounded-md bg-[#da3633] px-4 py-2 text-white hover:bg-[#f85149] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isDeletingBook ? "Eliminando..." : "Eliminar"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 
   return (
     <div className="my-72 mx-auto text-center">
-      <button onClick={() => signIn()} className="hover:bg-black hover:text-white rounded-full border-2 border-[#111] px-4 py-2 my-8">administrar</button>
+      <button onClick={() => signInAsAdmin(router.asPath)} className="hover:bg-black hover:text-white rounded-full border-2 border-[#111] px-4 py-2 my-8">administrar</button>
     </div>
   );
 }

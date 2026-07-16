@@ -19,7 +19,7 @@ export default function Nosotros() {
           <div className="text-center my-20">
             <h1 className="text-7xl font-bold mb-2 spectral">
               La editorial de libros más vendida en el Perú
-              <Image src="/peru.svg" alt="Perú" width={25} height={25} className="inline-block ml-2 blink" />
+              <Image src="/peru.svg" alt="Perú" width={25} height={25} className="inline-block ml-2 blink" style={{ width: "25px", height: "auto" }} />
             </h1>
             <h2 className="text-xl italic">Dirigida por Julio Benavides Parra</h2>
           </div>
@@ -32,19 +32,19 @@ export default function Nosotros() {
           <div className="flex flex-cols-1 gap-8">
             <div>
               <Link href="/events/15012023/01.JPG" target='_blank'>
-                <Image src="/events/15012023/01.JPG" alt="Julio Benavides Parra presentando libro 'Ácleman'" width={500} height={720} className="rounded-lg" />
+                <Image src="/events/15012023/01.JPG" alt="Julio Benavides Parra presentando libro 'Ácleman'" width={500} height={720} className="rounded-lg" style={{ width: "100%", maxWidth: "500px", height: "auto" }} />
               </Link>
               <p className="text-center mt-2">▲ 12 aniversario de la Editorial celebrado en el Bar Mal de Amores, Barranco. 2023.</p>
             </div>
             <div>
               <Link href="/events/15012023/02.JPG" target='_blank'>
-                <Image src="/events/15012023/02.JPG" alt="Jóvenes autores en evento de Vicio Perpetuo Vicio Perfecto" width={500} height={300} className="rounded-lg" />
+                <Image src="/events/15012023/02.JPG" alt="Jóvenes autores en evento de Vicio Perpetuo Vicio Perfecto" width={500} height={300} className="rounded-lg" style={{ width: "100%", maxWidth: "500px", height: "auto" }} />
               </Link>
               <p className="text-center mt-2">▲ Juan Romero (izq.) y Walter Velásquez (der.) exponiendo el contenido de sus libros.</p>
             </div>
             <div>
               <Link href="/events/15012023/03.JPG" target='_blank'>
-                <Image src="/events/15012023/03.JPG" alt="Héctor Ñaupari presentando su libro" width={500} height={720} className="rounded-lg" />
+                <Image src="/events/15012023/03.JPG" alt="Héctor Ñaupari presentando su libro" width={500} height={720} className="rounded-lg" style={{ width: "100%", maxWidth: "500px", height: "auto" }} />
               </Link>
               <p className="text-center mt-2">▲ Héctor Ñaupari presentando su libro `&quot;La boca de la sombra`&quot;.</p>
             </div>

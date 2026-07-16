@@ -5,7 +5,106 @@
     top: .72rem;
     right: 1rem;
     cursor: pointer;
-    z-index:1000;
+    z-index: 2147483647;
+  }
+
+  .topActions {
+    position: fixed;
+    top: .5rem;
+    right: 3.25rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    z-index: 2147483647;
+  }
+
+  .publishButton {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid currentColor;
+    border-radius: 9999px;
+    padding: 0 .8rem;
+    color: #fff;
+    font: inherit;
+    font-size: .875rem;
+    line-height: 1;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    background: rgb(0 0 0 / 0.12);
+  }
+
+  .publishButton:hover {
+    background: rgb(255 255 255 / 0.18);
+    text-decoration: underline;
+  }
+
+  .publishButtonDark {
+    color: #000;
+    background: rgb(255 255 255 / 0.3);
+  }
+
+  .publishButtonDark:hover {
+    background: rgb(0 0 0 / 0.08);
+  }
+
+  .profileButton {
+    display: flex;
+    flex: 0 0 32px;
+    height: 32px;
+    width: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid currentColor;
+    border-radius: 9999px;
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    background: rgb(0 0 0 / 0.12);
+  }
+
+  .profileButton:hover {
+    background: rgb(255 255 255 / 0.18);
+  }
+
+  .profileButtonDark {
+    color: #000;
+    background: rgb(255 255 255 / 0.3);
+  }
+
+  .profileButtonDark:hover {
+    background: rgb(0 0 0 / 0.08);
+  }
+
+  .profileIcon {
+    position: relative;
+    display: block;
+    height: 16px;
+    width: 16px;
+  }
+
+  .profileIcon::before,
+  .profileIcon::after {
+    position: absolute;
+    left: 50%;
+    content: "";
+    transform: translateX(-50%);
+    border: 1.5px solid currentColor;
+  }
+
+  .profileIcon::before {
+    top: 1px;
+    height: 6px;
+    width: 6px;
+    border-radius: 9999px;
+  }
+
+  .profileIcon::after {
+    bottom: 1px;
+    height: 7px;
+    width: 12px;
+    border-radius: 9999px 9999px 3px 3px;
   }
   
   .menuContainer {
@@ -17,7 +116,7 @@
     width: 100vw;
     right: -100vw;
     transition: right 0.75s ease; 
-    z-index:1000;
+    z-index: 2147483646;
     border:1px solid #111;
     padding-top:5em;
     padding-right:5em;
@@ -27,7 +126,7 @@
   
   .menuContainer.open {
     right: 0;
-    z-index:0;
+    z-index: 2147483646;
     backdrop-filter: blur(15px);
   }
   

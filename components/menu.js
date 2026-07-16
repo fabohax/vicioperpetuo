@@ -3,9 +3,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './menu.module.css';
+import PModal from './postularModal';
 
 const Menu = ({ dark }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPostularOpen, setIsPostularOpen] = useState(false);
 
   // Convert dark prop to a boolean
   const isDarkMode = dark === "true";
@@ -24,6 +26,22 @@ const Menu = ({ dark }) => {
 
   return (
     <div className={isDarkMode ? styles.inverted : ''}>
+      <div className={styles.topActions}>
+        <button
+          type="button"
+          className={`${styles.publishButton} ${isDarkMode ? styles.publishButtonDark : ''}`}
+          onClick={() => setIsPostularOpen(true)}
+        >
+          Publicar
+        </button>
+        <Link
+          href="/admin"
+          className={`${styles.profileButton} ${isDarkMode ? styles.profileButtonDark : ''}`}
+          aria-label="Ir a iniciar sesión de administrador"
+        >
+          <span className={styles.profileIcon} aria-hidden="true" />
+        </Link>
+      </div>
       <div className='z-100'>
         {isMenuOpen ? (
           <Image
@@ -33,6 +51,7 @@ const Menu = ({ dark }) => {
             alt="menu"
             onClick={closeMenu}
             className={styles.menuIcon}
+            style={{ width: "21px", height: "auto" }}
           />
         ) : (
           <Image
@@ -42,6 +61,7 @@ const Menu = ({ dark }) => {
             alt="menu"
             onClick={openMenu}
             className={styles.menuIcon}
+            style={{ width: "21px", height: "auto" }}
           />
         )}
       </div>
@@ -52,13 +72,17 @@ const Menu = ({ dark }) => {
         <Link href="/tienda" className='block hover:underline p-4 text-2xl' onClick={handleLinkClick}>Tienda</Link>
         <div className="">
           <Link href="https://facebook.com/edicionesvicioperpetuovicioperfecto" target='_blank' className='rounded-md m-4 inline-block' onClick={handleLinkClick}>
-            <Image src={isDarkMode ? "/facebook-dark.svg" : "/facebook.svg"} alt="facebook" height="21" width="21"/>
+            <Image src={isDarkMode ? "/facebook-dark.svg" : "/facebook.svg"} alt="facebook" height="21" width="21" style={{ width: "21px", height: "auto" }}/>
           </Link>
           <Link href="https://instagram.com/edicionesvicioperpetuo" target='_blank' className='m-4 inline-block' onClick={handleLinkClick}>
-            <Image src={isDarkMode ? "/instagram-dark.svg" : "/instagram.svg"} alt="instagram" height="21" width="21"/>
+            <Image src={isDarkMode ? "/instagram-dark.svg" : "/instagram.svg"} alt="instagram" height="21" width="21" style={{ width: "21px", height: "auto" }}/>
           </Link>
         </div>
-      </div>     
+      </div>
+      <PModal
+        isOpen={isPostularOpen}
+        onClose={() => setIsPostularOpen(false)}
+      />
     </div>
   );
 }

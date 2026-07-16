@@ -1,13 +1,43 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import PhoneCountrySelect, { COUNTRIES } from './PhoneCountrySelect';
+
+const DeliveryLocationPicker = dynamic(() => import('./DeliveryLocationPicker'), {
+  ssr: false,
+  loading: () => (
+    <div className="mb-4 rounded-lg border border-[#333] bg-[#080808] p-3 text-sm text-[#ddd]">
+      Cargando mapa...
+    </div>
+  ),
+});
 
 const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
   const router = useRouter();
-  const [formData, setFormData] = useState({ email: '', phone: '', txid: '', book: bookTitle, honeypot: '' });
+  const [formData, setFormData] = useState({
+    email: '',
+    phone: '',
+    phoneCountry: COUNTRIES[0],
+    txid: '',
+    book: bookTitle,
+    honeypot: '',
+    deliveryLocation: {
+      address: '',
+      lat: null,
+      lng: null,
+      placeId: '',
+    },
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('');
+  const paymentButtonClasses = (method) => {
+    const isSelected = paymentMethod === method;
+    return `w-full hover:bg-[#f5f5f5] hover:text-black focus:text-black px-4 py-4 rounded-2xl border-[#333] border-[1px] mx-1 ${
+      isSelected ? 'bg-[#f5f5f5] !text-black' : 'bg-black text-white'
+    }`;
+  };
 
   if (!isOpen) return null;
 
@@ -41,6 +71,16 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
       return;
     }
 
+    if (!formData.phone.trim()) {
+      setError('Por favor ingresa tu número telefónico.');
+      return;
+    }
+
+    if (!formData.deliveryLocation.address || !formData.deliveryLocation.lat || !formData.deliveryLocation.lng) {
+      setError('Por favor agrega una dirección de entrega y marca el punto en el mapa.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -52,6 +92,7 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
         },
         body: JSON.stringify({
           ...formData,
+          phone: `${formData.phoneCountry.dialCode} ${formData.phone.trim()}`.trim(),
           paymentMethod,  // Include selected payment method
           bookTitle,      // Include book title
           bookAuthor,     // Include book author
@@ -59,14 +100,21 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
         }),
       });
 
+      let result = null;
+      try {
+        result = await response.json();
+      } catch (error) {
+        console.error('Error parsing order response:', error);
+      }
+
       if (response.ok) {
         router.push('/hecho');
       } else {
-        setError('Error al enviar el pedido. Inténtalo de nuevo.');
+        setError(result?.error || 'No pudimos enviar el pedido. Inténtalo de nuevo.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setError('Ocurrió un error. Inténtalo de nuevo más tarde.');
+      setError('No pudimos conectar con el servidor. Revisa tu conexión e inténtalo otra vez.');
     } finally {
       setLoading(false);
     }
@@ -87,27 +135,21 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
               <button
                 type="button"
                 onClick={() => handlePaymentSelection('Yape')}
-                className={`w-full hover:bg-[#f5f5f5] text-white hover:text-black focus:text-black px-4 py-4 rounded-2xl border-[#333] border-[1px] mx-1 ${
-                  paymentMethod === 'Yape' ? 'bg-[#f5f5f5] text-black' : ''
-                }`}
+                className={paymentButtonClasses('Yape')}
               >
                 Yape
               </button>
               <button
                 type="button"
                 onClick={() => handlePaymentSelection('Plin')}
-                className={`w-full hover:bg-[#f5f5f5] text-white hover:text-black focus:text-black px-4 py-4 rounded-2xl border-[#333] border-[1px] mx-1 ${
-                  paymentMethod === 'Plin' ? 'bg-[#f5f5f5] text-black' : ''
-                }`}
+                className={paymentButtonClasses('Plin')}
               >
                 Plin
               </button>
               <button
                 type="button"
                 onClick={() => handlePaymentSelection('Bitcoin')}
-                className={`w-full hover:bg-[#f5f5f5] text-white  hover:text-black focus:text-black px-4 py-4 rounded-2xl border-[#333] border-[1px] mx-1 ${
-                  paymentMethod === 'Bitcoin' ? 'bg-[#f5f5f5] text-black' : ''
-                }`}
+                className={paymentButtonClasses('Bitcoin')}
               >
                 Bitcoin
               </button>
@@ -124,6 +166,7 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
                       width={150}
                       height={150}
                       className="mx-auto"
+                      style={{ width: "150px", height: "auto" }}
                     />
                     <p className="my-2">Pagar a este número <strong>+51 929 297 202</strong><br /> y capturar pantalla</p>
                   </div>
@@ -136,6 +179,7 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
                       width={150}
                       height={150}
                       className="mx-auto"
+                      style={{ width: "150px", height: "auto" }}
                     />
                     <p className="my-2">Pagar a este número <strong>+51 929 297 202</strong><br /> y capturar pantalla</p>
                   </div>
@@ -148,8 +192,9 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
                       width={150}
                       height={150}
                       className="mx-auto"
+                      style={{ width: "150px", height: "auto" }}
                     />
-                    <p className="my-2">Pagar a esta dirección <strong className="text-sm break-words bg-[#111] px-2 py-2 block rounded-md">bc1p0saw6z028y7h6eag3w6hx5an6mk5ta8qk7wx2d3gtqtrty243uvqvjzvew</strong> e ingresar TXID</p>
+                    <p className="my-2">Pagar a esta dirección <strong className="text-sm break-words bg-[#111] px-2 py-2 block rounded-md">bc1qqm3yk9v5wn55rg8wc5klcathqvurvpjtpeutjc</strong> e ingresar TXID</p>
                     <input
                       name="txid"
                       type="text"
@@ -174,13 +219,26 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
               disabled={loading}
             />
 
-            <input
-              name="phone"
-              type="number"
-              placeholder="Número telefónico"
-              value={formData.phone}
-              onChange={handleInputChange}
-              className="bg-black text-white hover:text-white px-4 py-4 rounded-lg hover:bg-black border-[#333] border-[1px] w-full mb-4"
+            <div className="flex items-stretch gap-2">
+              <PhoneCountrySelect
+                value={formData.phoneCountry}
+                onChange={(phoneCountry) => setFormData((prevState) => ({ ...prevState, phoneCountry }))}
+                disabled={loading}
+              />
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Número telefónico"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className="mb-4 min-w-0 flex-1 rounded-lg border border-[#333] bg-black px-4 py-4 text-white hover:bg-black hover:text-white"
+                disabled={loading}
+              />
+            </div>
+
+            <DeliveryLocationPicker
+              value={formData.deliveryLocation}
+              onChange={(deliveryLocation) => setFormData((prevState) => ({ ...prevState, deliveryLocation }))}
               disabled={loading}
             />
 

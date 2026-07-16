@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import 'leaflet/dist/leaflet.css'
 import '@/app/lit.css'
 import Footer from '@/components/footer';
 import Wa from '@/components/wa';

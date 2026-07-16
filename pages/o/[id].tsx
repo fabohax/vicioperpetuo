@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
@@ -8,6 +8,8 @@ import { supabase } from "@/utils/supabaseClient"; // Import Supabase client
 import Menu from "@/components/menu";
 import BookDetails from "@/components/book";
 import Modal from "@/components/modal"; // Modal component
+import LoadingImage from "@/components/LoadingImage";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { ParsedUrlQuery } from "querystring"; // Import this to define the params type
 
 interface Params extends ParsedUrlQuery {
@@ -15,7 +17,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 type Book = {
-  id: string;
+  id: number;
   title: string;
   author: string;
   description: string;
@@ -45,27 +47,35 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   }
 
-  const paths = (books || [])
-    .filter((book) => typeof book.isbn === "string" && book.isbn.trim().length > 0)
-    .map((book) => ({
-      params: { id: book.isbn.trim() },  // Use isbn as the dynamic id
-    }));
+  const uniqueIsbns = Array.from(
+    new Set(
+      (books || [])
+        .map((book) => (typeof book.isbn === "string" ? book.isbn.trim() : ""))
+        .filter(Boolean)
+    )
+  );
+
+  const paths = uniqueIsbns.map((isbn) => ({
+    params: { id: isbn },  // Use isbn as the dynamic id
+  }));
 
   return {
     paths,
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
 // Fetch book data based on ISBN and return as props
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as Params;
+  const id = (params as Params).id.trim();
 
   const { data: book, error } = await supabase
     .from("vpvp_books")
     .select("*")
-    .eq("isbn", id)
-    .single();
+    .ilike("isbn", `${id}%`)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
 
   if (error || !book) {
     return { notFound: true };
@@ -78,10 +88,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export default function Obras({ book }: Props) {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editableBook, setEditableBook] = useState<Book | null>(book);
+  const [isSavingBook, setIsSavingBook] = useState(false);
   const { data: session, status } = useSession();
   const allowedAdmins = ["fabohax@gmail.com", "edicionesvicioperpetuo@gmail.com"];
   const isAdmin = Boolean(session?.user?.email && allowedAdmins.includes(session.user.email));
+
+  if (router.isFallback || status === "loading") {
+    return <LoadingSpinner className="min-h-screen bg-white text-black" label="Cargando libro" />;
+  }
 
   if (!book) {
     return <div>Book not found</div>;
@@ -89,6 +106,60 @@ export default function Obras({ book }: Props) {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const adminBook = editableBook?.id === book.id ? editableBook : book;
+
+  const handleAdminBookChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setEditableBook((prevBook) => {
+      const currentBook = prevBook?.id === book.id ? prevBook : book;
+      return { ...currentBook, [name]: value } as Book;
+    });
+  };
+
+  const handleAdminBookSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!adminBook?.id) {
+      alert("No se pudo identificar el libro para guardar.");
+      return;
+    }
+
+    if (!adminBook.title.trim() || !adminBook.author.trim()) {
+      alert("El título y el autor son obligatorios.");
+      return;
+    }
+
+    setIsSavingBook(true);
+    const { data, error } = await supabase
+      .from("vpvp_books")
+      .update({
+        imgurl: adminBook.imgurl.trim(),
+        title: adminBook.title,
+        author: adminBook.author,
+        description: adminBook.description,
+        price: Number(adminBook.price) || null,
+        gender: adminBook.gender,
+        isbn: adminBook.isbn.trim(),
+        year: Number(adminBook.year) || null,
+        pages: Number(adminBook.pages) || null,
+        ratio: adminBook.ratio,
+        editorial: adminBook.editorial,
+      })
+      .eq("id", adminBook.id)
+      .select("*")
+      .single();
+    setIsSavingBook(false);
+
+    if (error) {
+      console.error("Error updating book:", error.message);
+      alert("Error al guardar: " + error.message);
+      return;
+    }
+
+    setEditableBook(data);
+    alert("Cambios guardados correctamente.");
+    router.push("/admin");
+  };
 
   return (
     <>
@@ -112,84 +183,99 @@ export default function Obras({ book }: Props) {
           <>
             {/* If the user is an admin, show the edit form */}
             <h1 className="text-2xl font-bold mb-6 mt-8">Editar Libro</h1>
-            <Image
-              src={book.imgurl}
-              alt="x"
+            <LoadingImage
+              src={adminBook.imgurl}
+              alt={`Cover of ${adminBook.title} by ${adminBook.author}`}
               width={640}
               height={720}
               className="mb-4 rounded-md"
+              spinnerLabel={`Cargando portada de ${adminBook.title}`}
+              style={{ width: "100%", height: "auto" }}
             />
-            <form className="space-y-4">
+            <form onSubmit={handleAdminBookSubmit} className="space-y-4">
               
               <input
                 name="imgurl"
                 type="text"
-                defaultValue={book.imgurl}
+                value={adminBook.imgurl}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               <input
                 name="title"
                 type="text"
-                defaultValue={book.title}
+                value={adminBook.title}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4 text-3xl bg-[#f5f5f5]"
+                required
               />
               <input
                 name="author"
                 type="text"
-                defaultValue={book.author}
+                value={adminBook.author}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
+                required
               />
               <textarea
                 name="description"
-                defaultValue={book.description}
+                value={adminBook.description}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4 h-[210px]"
               ></textarea>
               <input
                 name="price"
                 type="number"
-                defaultValue={String(book.price)}
+                value={String(adminBook.price ?? "")}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               <input
                 name="gender"
                 type="text"
-                defaultValue={book.gender}
+                value={adminBook.gender}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               
               <input
                 name="isbn"
                 type="text"
-                defaultValue={book.isbn}
+                value={adminBook.isbn}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               <input
                 name="year"
                 type="text"
-                defaultValue={book.year}
+                value={String(adminBook.year ?? "")}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               <input
                 name="pages"
                 type="text"
-                defaultValue={book.pages}
+                value={String(adminBook.pages ?? "")}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               <input
                 name="ratio"
                 type="text"
-                defaultValue={book.ratio}
+                value={adminBook.ratio}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               <input
                 name="editorial"
                 type="text"
-                defaultValue={book.editorial}
+                value={adminBook.editorial}
+                onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
               
-              <button type="submit" className="w-full hover:bg-black text-white border-2 bg-black py-4 px-4 rounded-lg my-8">
-                Guardar Cambios
+              <button type="submit" disabled={isSavingBook} className="w-full hover:bg-black text-white border-2 bg-black py-4 px-4 rounded-lg my-8 disabled:cursor-not-allowed disabled:opacity-60">
+                {isSavingBook ? "Guardando..." : "Guardar Cambios"}
               </button>
             </form>
             <button

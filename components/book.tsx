@@ -1,8 +1,7 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import LoadingImage from '@/components/LoadingImage';
 
 type Book = {
-  id: string;
+  id: number;
   title: string;
   author: string;
   description: string;
@@ -16,22 +15,20 @@ type Book = {
   imgurl: string; // Ensure 'imgurl' is part of the Book type
 };
 
-interface Props {
-  book: Book;
-}
-
 const BookDetails = ({ book }: { book: Book }) => {
-  const { title, author, price, description, isbn, year, pages, ratio, editorial, imgurl } = book;
+  const { title, author, price, description, isbn, year, pages, ratio, editorial } = book;
   
   return (
     <div className="mx-auto p-4">
       <div className="flex items-center justify-center">
-        <Image 
+        <LoadingImage 
           src={book.imgurl}
           height={720} 
           width={640} 
           alt={`Cover of ${title} by ${author}`} 
+          spinnerLabel={`Cargando portada de ${title}`}
           className="w-full mb-8 rounded-md"
+          style={{ width: "100%", height: "auto" }}
         />
       </div>
       

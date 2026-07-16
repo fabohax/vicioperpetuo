@@ -1,18 +1,36 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/utils/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-// Supabase configuration
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { signInAsAdmin } from "@/utils/adminAuth";
+import { LogOut } from "lucide-react";
 
 interface Author {
   id: number;
   name: string;
   imgurl: string;
+}
+
+function TrashIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    >
+      <path d="M3 6h18" />
+      <path d="M8 6V4h8v2" />
+      <path d="M19 6l-1 14H6L5 6" />
+      <path d="M10 11v5" />
+      <path d="M14 11v5" />
+    </svg>
+  );
 }
 
 export default function Autores() {
@@ -70,9 +88,9 @@ export default function Autores() {
 
   if (session) {
     return (
-      <>
-        <div>
-          <div className="flex flex-row fixed top-8 left-8 gap-2 space-x-8">
+      <div className="min-h-screen bg-black px-4 py-6 text-[#e6edf3] sm:px-6 lg:px-8 lg:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="fixed left-4 top-8 z-10 flex flex-row flex-wrap gap-3 rounded-md border border-[#30363d] bg-[#0d1117]/90 px-3 py-2 text-sm text-white shadow-sm backdrop-blur sm:left-8 sm:gap-5">
             <div>
               👤 <Link href="/admin" className="hover:underline">
                 {session?.user?.email?.split("@")[0] || "NN"}
@@ -81,60 +99,83 @@ export default function Autores() {
             <div>
               📇 <Link href="/admin/indexar" className="hover:underline">Indexar</Link>
             </div>
+            <div>🪶 <Link href="/admin/autores" className="hover:underline">Autores</Link></div>
             <div>🧾 <Link href="/admin/pedidos" className="hover:underline">Pedidos</Link></div>
           </div>
           <button
             onClick={() => signOut()}
-            className="fixed top-0 right-8 hover:bg-black hover:text-white my-8 border-[1px] border-black rounded-full px-4 py-2 text-sm"
+            className="fixed right-4 top-0 z-10 my-8 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#30363d] bg-[#0d1117]/90 text-white backdrop-blur hover:border-[#8b949e] hover:bg-[#161b22] sm:right-8"
+            aria-label="Cerrar sesión"
+            title="Cerrar sesión"
           >
-            CERRAR SESIÓN
+            <LogOut className="h-5 w-5" aria-hidden="true" />
           </button>
 
           {/* Author List */}
-          <h1 className="spectral text-2xl font-bold text-left mt-20 mx-8">
+          <h1 className="spectral mt-20 text-left text-2xl font-bold text-white">
             Autores de Vicio Perpetuo Vicio Perfecto
           </h1>
-          <p className="mx-8">
+          <p className="text-[#8b949e]">
             Aquí puedes revisar la lista completa de Autores y editarlos.
           </p>
 
-          <div className="grid grid-col lg:grid-cols-2 container mx-auto p-4 my-4 px-4 lg:w-full border-[1px] border-[#777] py-4 rounded-lg spectral">
-            <div className="py-2">
-              <h3 className="border-[1px] border-[#777] bg-[#f3f3f3] rounded-md px-4 mr-4">Autores</h3>
+          {errorMessage && <p className="mt-4 text-red-500">{errorMessage}</p>}
+
+          <div className="mb-16 mt-6 grid w-full grid-cols-1 gap-6 lg:mb-24 lg:mt-16 lg:grid-cols-2">
+            <section className="overflow-hidden rounded-md border border-[#30363d] bg-[#0d1117]">
+              <div className="flex items-center justify-between border-b border-[#30363d] bg-[#161b22] px-4 py-3">
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Autores</h2>
+                <span className="text-xs text-[#8b949e]">{authors.length} registros</span>
+              </div>
               {loading ? (
-                <p className="p-2">Cargando autores...</p>
+                <p className="p-4 text-[#8b949e]">Cargando autores...</p>
               ) : authors.length ? (
-                <ul className="space-y-4">
-                  {authors.map((author) => (
-                    <li key={author.id} className="flex justify-between items-center p-4 bg-gray-100 border-[1px] border-[#777] bg-[#f3f3f3] rounded-md rounded-lg mt-2 mr-4">
-                      <div>
-                        <span className="font-bold">{author.name}</span>
-                      </div>
-                      <button
-                        onClick={() => handleRemove(author.id)}
-                        className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700"
-                      >
-                        Remover
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                <div className="overflow-x-auto">
+                  <table className="w-full table-fixed border-collapse text-sm">
+                    <thead className="bg-[#161b22] text-left text-white">
+                      <tr>
+                        <th scope="col" className="border-b border-[#30363d] px-4 py-2 font-semibold">Nombre</th>
+                        <th scope="col" className="w-16 border-b border-[#30363d] px-3 py-2 text-center font-semibold">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {authors.map((author) => (
+                        <tr key={author.id} className="border-t border-[#30363d] hover:bg-[#161b22]">
+                          <td className="truncate px-4 py-3 font-semibold text-[#c9d1d9]">{author.name}</td>
+                          <td className="px-3 py-2 text-center">
+                            <button
+                              type="button"
+                              onClick={() => handleRemove(author.id)}
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-[#30363d] text-[#f85149] hover:border-[#f85149] hover:bg-[#da3633]/15"
+                              aria-label={`Eliminar ${author.name}`}
+                              title="Eliminar"
+                            >
+                              <TrashIcon />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               ) : (
-                <p>No authors available.</p>
+                <p className="p-4 text-[#8b949e]">No hay autores disponibles.</p>
               )}
-            </div>
+            </section>
 
             {/* Add Author Form */}
-            <div className="py-2">
-              <h3 className="border-[1px] border-[#777] bg-[#f3f3f3] rounded-md px-4">Añadir</h3>
-              <form onSubmit={handleAddAuthor} className="mt-4 space-y-4">
+            <section className="overflow-hidden rounded-md border border-[#30363d] bg-[#0d1117]">
+              <div className="border-b border-[#30363d] bg-[#161b22] px-4 py-3">
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Añadir</h2>
+              </div>
+              <form onSubmit={handleAddAuthor} className="space-y-4 p-4">
                 <input
                   type="text"
                   name="name"
                   value={newAuthor.name}
                   onChange={(e) => setNewAuthor({ ...newAuthor, name: e.target.value })}
                   placeholder="Nombre del autor"
-                  className="w-full p-2 py-4 border rounded-md"
+                  className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
                   required
                 />
                 <input
@@ -143,27 +184,27 @@ export default function Autores() {
                   value={newAuthor.imgurl}
                   onChange={(e) => setNewAuthor({ ...newAuthor, imgurl: e.target.value })}
                   placeholder="URL de la imagen. Máximo 50 MB. Ratio cuadrado."
-                  className="w-full p-2 py-4 border rounded-md"
+                  className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white py-4 px-4 rounded-lg hover:bg-blue-700"
+                  className="w-full rounded-md bg-[#238636] px-4 py-3 font-semibold text-white hover:bg-[#2ea043]"
                 >
                   Añadir Autor
                 </button>
               </form>
-            </div>
+            </section>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
     <>
       <div className="my-72 mx-auto text-center">
-        <button onClick={() => signIn()} className="hover:bg-white hover:text-black rounded-full border-2 border-white px-4 py-2 my-8">
+        <button onClick={() => signInAsAdmin(router.asPath)} className="hover:bg-white hover:text-black rounded-full border-2 border-white px-4 py-2 my-8">
           Iniciar Sesión
         </button>
       </div>

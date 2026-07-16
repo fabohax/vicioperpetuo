@@ -47,7 +47,8 @@ const Poesia: React.FC<Props> = ({ books }) => {
               alt={book.title}
               width={300}
               height={400}
-              className="rounded-lg"    
+              className="rounded-lg"
+              style={{ width: "100%", height: "auto" }}
             />
             <h2 className="text-xl font-bold mt-4">{book.title}</h2>
             <p className="text-gray-600">{book.author}</p>
