@@ -1,11 +1,11 @@
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { signInAsAdmin } from "@/utils/adminAuth";
 import PinataImageUpload from "@/components/PinataImageUpload";
-import { CheckCircle2, LogOut, Pencil, UserRound, X } from "lucide-react";
+import { CheckCircle2, Pencil, UserRound, X } from "lucide-react";
+import AdminNav from "@/components/AdminNav";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 interface Author {
@@ -169,26 +169,7 @@ export default function Autores() {
     return (
       <div className="min-h-screen bg-black px-4 py-6 text-[#e6edf3] sm:px-6 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-6xl">
-          <div className="fixed left-4 top-8 z-10 flex flex-row flex-wrap gap-3 rounded-md border border-[#30363d] bg-[#0d1117]/90 px-3 py-2 text-sm text-white shadow-sm backdrop-blur sm:left-8 sm:gap-5">
-            <div>
-              👤 <Link href="/admin" className="hover:underline">
-                {session?.user?.email?.split("@")[0] || "NN"}
-              </Link>
-            </div>
-            <div>
-              📇 <Link href="/admin/indexar" className="hover:underline">Indexar</Link>
-            </div>
-            <div>🪶 <Link href="/admin/autores" className="hover:underline">Autores</Link></div>
-            <div>🧾 <Link href="/admin/pedidos" className="hover:underline">Pedidos</Link></div>
-          </div>
-          <button
-            onClick={() => signOut()}
-            className="fixed right-4 top-0 z-10 my-8 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#30363d] bg-[#0d1117]/90 text-white backdrop-blur hover:border-[#8b949e] hover:bg-[#161b22] sm:right-8"
-            aria-label="Cerrar sesión"
-            title="Cerrar sesión"
-          >
-            <LogOut className="h-5 w-5" aria-hidden="true" />
-          </button>
+          <AdminNav />
 
           {/* Author List */}
           <h1 className="spectral mt-20 text-left text-5xl font-bold text-white">
