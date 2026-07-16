@@ -24,6 +24,7 @@ const LoadingImage = ({
   const [loading, setLoading] = useState(true);
   const srcValue = typeof props.src === "string" ? props.src : "";
   const isImgurImage = srcValue.includes("imgur.com");
+  const shouldSkipOptimization = isImgurImage || srcValue.includes("ipfs.io");
   const imageStyle = isImgurImage
     ? { ...style, width: style?.width ?? "auto", height: style?.height ?? "auto" }
     : { width: "auto", height: "auto", ...style };
@@ -37,6 +38,7 @@ const LoadingImage = ({
       )}
       <Image
         {...props}
+        unoptimized={props.unoptimized ?? shouldSkipOptimization}
         alt={alt}
         className={`${className} ${loading ? "opacity-0" : "opacity-100"}`}
         style={imageStyle}

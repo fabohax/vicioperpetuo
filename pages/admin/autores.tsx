@@ -4,6 +4,7 @@ import { supabase } from "@/utils/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signInAsAdmin } from "@/utils/adminAuth";
+import PinataImageUpload from "@/components/PinataImageUpload";
 import { LogOut } from "lucide-react";
 
 interface Author {
@@ -84,6 +85,10 @@ export default function Autores() {
       
     }
     router.reload();
+  };
+
+  const handleAuthorImageChange = (imgurl: string) => {
+    setNewAuthor((author) => ({ ...author, imgurl }));
   };
 
   if (session) {
@@ -178,14 +183,12 @@ export default function Autores() {
                   className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
                   required
                 />
-                <input
-                  type="text"
-                  name="imgurl"
+                <PinataImageUpload
                   value={newAuthor.imgurl}
-                  onChange={(e) => setNewAuthor({ ...newAuthor, imgurl: e.target.value })}
-                  placeholder="URL de la imagen. Máximo 50 MB. Ratio cuadrado."
-                  className="w-full rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
-                  required
+                  onChange={handleAuthorImageChange}
+                  placeholder="URL de foto del autor"
+                  emptyMessage="Sube una foto de autor con Pinata o pega una URL."
+                  minHeightClassName="min-h-80"
                 />
                 <button
                   type="submit"

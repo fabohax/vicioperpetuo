@@ -43,12 +43,12 @@ const Page = () => {
     <div>
       {/* Header */}
       <header
-        className="fixed top-3 left-4 right-16 overflow-visible"
+        className="fixed left-4 right-[11rem] top-3 overflow-hidden sm:right-16"
         style={{ zIndex: 2147483647 }}
       >
         <Link
           href="/"
-          className="inline-block max-w-full whitespace-nowrap bg-[#111]/85 pr-2 font-medium leading-6 hover:underline"
+          className="block max-w-full truncate bg-[#111]/85 pr-2 font-medium leading-6 hover:underline"
         >
           Vicio Perpetuo Vicio Perfecto
         </Link>

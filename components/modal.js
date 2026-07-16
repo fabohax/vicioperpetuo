@@ -121,11 +121,26 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-black rounded-lg pl-6 py-6 w-full max-w-md mx-4 border-[1px] border-[#333] text-[#fff] relative">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-black rounded-lg pl-6 py-6 w-full max-w-md mx-4 border-[1px] border-[#333] text-[#fff] relative"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Cerrar modal"
+          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#555] text-xl leading-none text-white hover:bg-white hover:text-black focus:border-[#555] focus:outline-none"
+          disabled={loading}
+        >
+          ×
+        </button>
         <div className="overflow-y-auto max-h-[80vh] pr-6 custom-scrollbar">
           <form onSubmit={handleSub}>
-            <p>Comprar</p>
+            <p className="pr-10">Comprar</p>
             <h1 className="mt-8 spectral text-3xl">{bookTitle}</h1>
             <h3>de {bookAuthor}</h3>
             <p className="my-8">Precio: {bookPrice} PEN</p>
@@ -261,16 +276,6 @@ const Modal = ({ isOpen, onClose, bookTitle, bookPrice, bookAuthor }) => {
               disabled={loading}
             >
               {loading ? 'Ordenando...' : 'Ordenar'}
-            </button>
-
-            {/* Close Button */}
-            <button
-              className="bg-black text-white hover:text-white px-4 py-2 hover:underline hover:bg-black w-full"
-              type="button"
-              onClick={onClose}
-              disabled={loading}
-            >
-              Cerrar
             </button>
           </form>
         </div>

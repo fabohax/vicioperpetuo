@@ -9,7 +9,13 @@ const readFileAsDataUrl = (file) =>
     reader.readAsDataURL(file);
   });
 
-export default function PinataImageUpload({ value, onChange }) {
+export default function PinataImageUpload({
+  value,
+  onChange,
+  placeholder = "URL de Imagen de Portada",
+  emptyMessage = "Sube una portada con Pinata o pega una URL.",
+  minHeightClassName = "min-h-96",
+}) {
   const [localPreview, setLocalPreview] = useState("");
   const [cid, setCid] = useState("");
   const [status, setStatus] = useState("");
@@ -71,7 +77,7 @@ export default function PinataImageUpload({ value, onChange }) {
   return (
     <div className="grid gap-3 sm:col-span-2">
       <div
-        className="flex min-h-96 w-full items-end overflow-hidden rounded-md border border-[#30363d] bg-[#010409] bg-cover bg-center"
+        className={`flex ${minHeightClassName} w-full items-end overflow-hidden rounded-md border border-[#30363d] bg-[#010409] bg-cover bg-center`}
         style={{
           backgroundImage: previewUrl ? `url(${previewUrl})` : "none",
         }}
@@ -81,7 +87,7 @@ export default function PinataImageUpload({ value, onChange }) {
             <input
               name="imgurl"
               type="text"
-              placeholder="URL de Imagen de Portada"
+              placeholder={placeholder}
               value={value}
               onChange={(event) => onChange(event.target.value)}
               className="min-w-0 flex-1 rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
@@ -102,7 +108,7 @@ export default function PinataImageUpload({ value, onChange }) {
           <div className="flex flex-col gap-2 text-sm text-[#8b949e] sm:flex-row sm:items-center sm:justify-between">
             <span className="inline-flex items-center gap-2">
               {cid ? <CheckCircle2 className="h-4 w-4 text-[#3fb950]" aria-hidden="true" /> : <ImageIcon className="h-4 w-4" aria-hidden="true" />}
-              {error || status || "Sube una portada con Pinata o pega una URL."}
+              {error || status || emptyMessage}
             </span>
             {cid ? (
               <button
