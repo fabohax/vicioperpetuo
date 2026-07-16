@@ -1,7 +1,8 @@
-import { auth } from "@/auth";
+import { getToken } from "next-auth/jwt";
 
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+const ALLOWED_ADMINS = new Set(["fabohax@gmail.com", "edicionesvicioperpetuo@gmail.com"]);
 
 export const config = {
   api: {
@@ -31,8 +32,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Metodo no permitido." });
   }
 
-  const session = await auth(req, res);
-  if (!session) {
+  const session = await getToken({
+    req,
+    secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+  });
+
+  if (!session?.email || !ALLOWED_ADMINS.has(session.email)) {
     return res.status(401).json({ error: "Debes iniciar sesion para subir imagenes." });
   }
 

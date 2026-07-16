@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { signInAsAdmin } from "@/utils/adminAuth";
 import { LogOut } from "lucide-react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 interface Order {
   id: number;
@@ -43,7 +44,7 @@ function TrashIcon() {
 }
 
 export default function Pedidos() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -86,6 +87,10 @@ export default function Pedidos() {
     return new Date(datetime).toLocaleDateString("es-ES", options);
   };
 
+  if (status === "loading" || (session && loading)) {
+    return <LoadingSpinner className="min-h-screen bg-black text-white" label="Cargando pedidos" />;
+  }
+
   if (session) {
     return (
       <div className="min-h-screen bg-black px-4 py-6 text-[#e6edf3] sm:px-6 lg:px-8 lg:py-16">
@@ -124,9 +129,7 @@ export default function Pedidos() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Pedidos</h2>
               <span className="text-xs text-[#8b949e]">{orders.length} registros</span>
             </div>
-              {loading ? (
-                <p className="p-4 text-[#8b949e]">Cargando pedidos...</p>
-              ) : orders.length ? (
+              {orders.length ? (
                 <div className="overflow-x-auto">
                   <table className="min-w-[1180px] w-full border-collapse text-sm">
                     <thead className="bg-[#161b22] text-left text-white">

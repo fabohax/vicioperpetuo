@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import { signInAsAdmin } from "@/utils/adminAuth";
 import { ChevronDown, LogOut } from "lucide-react";
 import PinataImageUpload from "@/components/PinataImageUpload";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const AVAILABLE_GENRES = ["Poesía", "Narrativa", "Cuento", "Dramaturgia"];
 const AVAILABLE_EDITORIALS = ["Vicio Perpetuo Vicio Perfecto", "Infinito"];
 
 export default function Catalogar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [bookData, setBookData] = useState({
     title: '',
@@ -85,6 +86,10 @@ export default function Catalogar() {
     }
 };
 
+
+  if (status === "loading") {
+    return <LoadingSpinner className="min-h-screen bg-black text-white" label="Cargando admin" />;
+  }
 
   if (session) {
     return (

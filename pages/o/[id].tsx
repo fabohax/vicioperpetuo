@@ -3,18 +3,22 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { GetStaticProps, GetStaticPaths } from "next";
+import { CheckCircle2, ChevronDown } from "lucide-react";
 import { supabase } from "@/utils/supabaseClient"; // Import Supabase client
 import Menu from "@/components/menu";
 import BookDetails from "@/components/book";
 import Modal from "@/components/modal"; // Modal component
-import LoadingImage from "@/components/LoadingImage";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import PinataImageUpload from "@/components/PinataImageUpload";
 import { Seo, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { ParsedUrlQuery } from "querystring"; // Import this to define the params type
 
 interface Params extends ParsedUrlQuery {
   id: string; // This is the ISBN code
 }
+
+const AVAILABLE_GENRES = ["Poesía", "Narrativa", "Cuento", "Dramaturgia"];
+const AVAILABLE_EDITORIALS = ["Vicio Perpetuo Vicio Perfecto", "Infinito"];
 
 type Book = {
   id: number;
@@ -92,6 +96,7 @@ export default function Obras({ book }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editableBook, setEditableBook] = useState<Book | null>(book);
   const [isSavingBook, setIsSavingBook] = useState(false);
+  const [saveMessage, setSaveMessage] = useState("");
   const { data: session, status } = useSession();
   const allowedAdmins = ["fabohax@gmail.com", "edicionesvicioperpetuo@gmail.com"];
   const isAdmin = Boolean(session?.user?.email && allowedAdmins.includes(session.user.email));
@@ -139,11 +144,20 @@ export default function Obras({ book }: Props) {
     },
   };
 
-  const handleAdminBookChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleAdminBookChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    setSaveMessage("");
     setEditableBook((prevBook) => {
       const currentBook = prevBook?.id === book.id ? prevBook : book;
       return { ...currentBook, [name]: value } as Book;
+    });
+  };
+
+  const handleAdminBookImageChange = (imgurl: string) => {
+    setSaveMessage("");
+    setEditableBook((prevBook) => {
+      const currentBook = prevBook?.id === book.id ? prevBook : book;
+      return { ...currentBook, imgurl } as Book;
     });
   };
 
@@ -188,7 +202,7 @@ export default function Obras({ book }: Props) {
     }
 
     setEditableBook(data);
-    alert("Cambios guardados correctamente.");
+    setSaveMessage("Cambios guardados correctamente.");
     router.push("/admin");
   };
 
@@ -216,23 +230,13 @@ export default function Obras({ book }: Props) {
           <>
             {/* If the user is an admin, show the edit form */}
             <h1 className="text-2xl font-bold mb-6 mt-8">Editar Libro</h1>
-            <LoadingImage
-              src={adminBook.imgurl}
-              alt={`Cover of ${adminBook.title} by ${adminBook.author}`}
-              width={640}
-              height={720}
-              className="mb-4 rounded-md"
-              spinnerLabel={`Cargando portada de ${adminBook.title}`}
-              style={{ width: "100%", height: "auto" }}
-            />
             <form onSubmit={handleAdminBookSubmit} className="space-y-4">
-              
-              <input
-                name="imgurl"
-                type="text"
+              <PinataImageUpload
                 value={adminBook.imgurl}
-                onChange={handleAdminBookChange}
-                className="w-full p-2 border rounded-md py-4"
+                onChange={handleAdminBookImageChange}
+                emptyMessage="Sube una portada con Pinata."
+                minHeightClassName="min-h-[28rem]"
+                allowUrlInput={false}
               />
               <input
                 name="title"
@@ -263,13 +267,22 @@ export default function Obras({ book }: Props) {
                 onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
-              <input
-                name="gender"
-                type="text"
-                value={adminBook.gender}
-                onChange={handleAdminBookChange}
-                className="w-full p-2 border rounded-md py-4"
-              />
+              <div className="relative">
+                <select
+                  name="gender"
+                  value={adminBook.gender}
+                  onChange={handleAdminBookChange}
+                  className="w-full appearance-none border rounded-md p-2 py-4 pr-12"
+                >
+                  <option value="">Género</option>
+                  {AVAILABLE_GENRES.map((genre) => (
+                    <option key={genre} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-black" aria-hidden="true" />
+              </div>
               
               <input
                 name="isbn"
@@ -299,17 +312,32 @@ export default function Obras({ book }: Props) {
                 onChange={handleAdminBookChange}
                 className="w-full p-2 border rounded-md py-4"
               />
-              <input
-                name="editorial"
-                type="text"
-                value={adminBook.editorial}
-                onChange={handleAdminBookChange}
-                className="w-full p-2 border rounded-md py-4"
-              />
+              <div className="relative">
+                <select
+                  name="editorial"
+                  value={adminBook.editorial}
+                  onChange={handleAdminBookChange}
+                  className="w-full appearance-none border rounded-md p-2 py-4 pr-12"
+                >
+                  <option value="">Editorial</option>
+                  {AVAILABLE_EDITORIALS.map((editorial) => (
+                    <option key={editorial} value={editorial}>
+                      {editorial}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-black" aria-hidden="true" />
+              </div>
               
               <button type="submit" disabled={isSavingBook} className="w-full hover:bg-black text-white border-2 bg-black py-4 px-4 rounded-lg my-8 disabled:cursor-not-allowed disabled:opacity-60">
                 {isSavingBook ? "Guardando..." : "Guardar Cambios"}
               </button>
+              {saveMessage ? (
+                <p className="inline-flex items-center gap-2 text-sm font-medium text-green-700">
+                  <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+                  {saveMessage}
+                </p>
+              ) : null}
             </form>
           </>
         ) : (

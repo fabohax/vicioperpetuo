@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signInAsAdmin } from "@/utils/adminAuth";
 import { LogOut } from "lucide-react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 interface Book {
   id: number;
@@ -41,7 +42,7 @@ function TrashIcon() {
 }
 
 export default function Admin() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [books, setBooks] = useState<Book[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
   const [loadingA, setLoadingA] = useState(true);
@@ -104,6 +105,10 @@ export default function Admin() {
     }
   };
 
+  if (status === "loading" || (session && (loadingA || loadingB))) {
+    return <LoadingSpinner className="min-h-screen bg-black text-white" label="Cargando admin" />;
+  }
+
   if (session) {
     return (  
       <div className="min-h-screen bg-black px-4 py-6 text-[#e6edf3] sm:px-6 lg:px-8 lg:py-16">
@@ -141,8 +146,7 @@ export default function Admin() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Libros</h2>
               <span className="text-xs text-[#8b949e]">{books.length} registros</span>
             </div>
-            {loadingA ? <p className="p-4 text-[#8b949e]">Cargando libros...</p> : (
-              books.length ? (
+            {books.length ? (
                 <div className="overflow-x-auto">
                   <table className="w-full table-fixed border-collapse text-sm">
                     <thead className="bg-[#161b22] text-left text-white">
@@ -177,8 +181,7 @@ export default function Admin() {
                     </tbody>
                   </table>
                 </div>
-              ) : <p className="p-4 text-[#8b949e]">No hay libros disponibles.</p>
-            )}
+              ) : <p className="p-4 text-[#8b949e]">No hay libros disponibles.</p>}
             <Link href="/admin/indexar" className="block border-t border-[#30363d] bg-[#0d1117] px-4 py-3 text-sm font-medium text-[#3fb950] hover:bg-[#161b22]">
                 + Añadir otro libro
             </Link>
@@ -189,8 +192,7 @@ export default function Admin() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-white">Autores</h2>
               <span className="text-xs text-[#8b949e]">{authors.length} registros</span>
             </div>
-            {loadingB ? <p className="p-4 text-[#8b949e]">Cargando autores...</p> : (
-              authors.length ? (
+            {authors.length ? (
                 <div className="overflow-x-auto">
                   <table className="w-full table-fixed border-collapse text-sm">
                     <thead className="bg-[#161b22] text-left text-white">
@@ -219,8 +221,7 @@ export default function Admin() {
                     </tbody>
                   </table>
                 </div>
-              ) : <p className="p-4 text-[#8b949e]">No hay autores disponibles.</p>
-            )}
+              ) : <p className="p-4 text-[#8b949e]">No hay autores disponibles.</p>}
             <Link href="/admin/autores" className="block border-t border-[#30363d] bg-[#0d1117] px-4 py-3 text-sm font-medium text-[#3fb950] hover:bg-[#161b22]">
                 + Añadir otro autor
             </Link>

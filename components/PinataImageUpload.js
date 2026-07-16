@@ -1,6 +1,8 @@
 import { CheckCircle2, Copy, Image as ImageIcon, UploadCloud } from "lucide-react";
 import { useMemo, useState } from "react";
 
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+
 const readFileAsDataUrl = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -9,12 +11,27 @@ const readFileAsDataUrl = (file) =>
     reader.readAsDataURL(file);
   });
 
+const readUploadResponse = async (response) => {
+  const contentType = response.headers.get("content-type") || "";
+
+  if (contentType.includes("application/json")) {
+    return response.json();
+  }
+
+  const text = await response.text();
+  const title = text.match(/<title>(.*?)<\/title>/i)?.[1];
+  return {
+    error: title || text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() || "El servidor no devolvio JSON.",
+  };
+};
+
 export default function PinataImageUpload({
   value,
   onChange,
   placeholder = "URL de Imagen de Portada",
   emptyMessage = "Sube una portada con Pinata o pega una URL.",
   minHeightClassName = "min-h-96",
+  allowUrlInput = true,
 }) {
   const [localPreview, setLocalPreview] = useState("");
   const [cid, setCid] = useState("");
@@ -31,6 +48,10 @@ export default function PinataImageUpload({
     if (!file) return;
     if (!file.type.startsWith("image/")) {
       setError("Selecciona un archivo de imagen.");
+      return;
+    }
+    if (file.size > MAX_IMAGE_BYTES) {
+      setError("La imagen debe pesar menos de 8 MB.");
       return;
     }
 
@@ -51,7 +72,7 @@ export default function PinataImageUpload({
         }),
       });
 
-      const result = await response.json();
+      const result = await readUploadResponse(response);
       if (!response.ok) {
         throw new Error(result.error || "No se pudo subir la imagen.");
       }
@@ -76,22 +97,29 @@ export default function PinataImageUpload({
 
   return (
     <div className="grid gap-3 sm:col-span-2">
-      <div
-        className={`flex ${minHeightClassName} w-full items-end overflow-hidden rounded-md border border-[#30363d] bg-[#010409] bg-cover bg-center`}
-        style={{
-          backgroundImage: previewUrl ? `url(${previewUrl})` : "none",
-        }}
-      >
-        <div className="flex w-full flex-col gap-3 bg-[#010409]/85 p-4 backdrop-blur">
+      <div className="w-full overflow-hidden rounded-md border border-[#30363d] bg-[#010409]">
+        {previewUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={previewUrl}
+            alt="Vista previa de portada"
+            className="block h-auto w-full"
+          />
+        ) : (
+          <div className={`${minHeightClassName} w-full`} />
+        )}
+        <div className="flex w-full flex-col gap-3 border-t border-[#30363d] bg-[#010409]/95 p-4">
           <div className="flex flex-col gap-3 sm:flex-row">
-            <input
-              name="imgurl"
-              type="text"
-              placeholder={placeholder}
-              value={value}
-              onChange={(event) => onChange(event.target.value)}
-              className="min-w-0 flex-1 rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
-            />
+            {allowUrlInput ? (
+              <input
+                name="imgurl"
+                type="text"
+                placeholder={placeholder}
+                value={value}
+                onChange={(event) => onChange(event.target.value)}
+                className="min-w-0 flex-1 rounded-md border border-[#30363d] bg-[#010409] px-4 py-3 text-white outline-none placeholder:text-[#8b949e] focus:border-[#58a6ff]"
+              />
+            ) : null}
             <label className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border border-[#30363d] bg-[#161b22] px-4 py-3 font-semibold text-white hover:border-[#8b949e] hover:bg-[#1f2937]">
               <UploadCloud className="h-5 w-5" aria-hidden="true" />
               {isUploading ? "Subiendo..." : "Subir"}
